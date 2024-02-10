@@ -6,6 +6,7 @@ import CartIcon from "../features/Icons/CartIcon";
 import UserIcon from "../features/Icons/UserIcon";
 
 const StyledNav = styled.nav`
+  position: relative;
   padding: 1.2rem;
 `;
 
@@ -29,13 +30,15 @@ const StyledList = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin: 0;
   padding: 0;
 `;
 
 const LogoDiv = styled.div`
-  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const StyledAnchor = styled.a`
@@ -60,10 +63,10 @@ const StyledDiv = styled.div`
 function NavBar(props) {
   return (
     <StyledNav>
+      <LogoDiv>
+        <span>LOGO x Patty</span>
+      </LogoDiv>
       <UL>
-        <LogoDiv>
-          <span>LOGO</span>
-        </LogoDiv>
         <StyledList>
           <StyledAnchor href="/account/login">
             <UserIcon />

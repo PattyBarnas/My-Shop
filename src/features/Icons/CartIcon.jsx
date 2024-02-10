@@ -1,5 +1,5 @@
 import React from "react";
-import "./IonIcon.css";
+import "./icon.css";
 
 const CartIcon = () => {
   return <ion-icon name="cart" />;
