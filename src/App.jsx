@@ -5,16 +5,18 @@ import NavBar from "./ui/NavBar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 
-function App(props) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+import { CartProvider } from "./store/CartContext";
 
+function App(props) {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* <Route index element={<Navigate replace to="/" />} /> */}
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          {/* <Route index element={<Navigate replace to="/" />} /> */}
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

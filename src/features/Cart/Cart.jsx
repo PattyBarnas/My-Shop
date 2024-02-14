@@ -10,6 +10,7 @@ const StyledCart = styled.div`
   width: 25%;
   height: 100%;
   text-align: center;
+  z-index: 1;
 `;
 
 function Cart({ children }) {

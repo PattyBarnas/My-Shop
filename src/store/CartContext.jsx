@@ -1,40 +1,75 @@
-import React, { createContext, useReducer } from "react";
+import { createContext, useReducer, useContext } from "react";
 
 const CartContext = createContext();
 
 const initialState = {
-  items: [],
+  cart: [],
   totalAmount: 0,
   quantity: 0,
-  addItem: (item) => {},
-  removeItem: (id) => {},
-  openCart: () => {},
-  closeCart: () => {},
-  clearCart: () => {},
+  openCart: false,
+  clearCart: false,
 };
 
-function reducer(state, action){
-    switch (action.type){
-        case 'addItem'{
-            return {...state.items, items: action.payload,}
-        }
-    }
-}
+function reducer(state, action) {
+  switch (action.type) {
+    case "openCart":
+      return {
+        ...state,
+        openCart: !state.openCart,
+      };
+    // case "closeCart":
+    //   return {
+    //     ...state,
+    //     openCart: false,
+    //   };
 
-function CartProvider({ children }) {
-  const [
-    {
-      items,
-      totalAmount,
-      quantity,
-    
-    },
-    dispatch,
-  ] = useReducer(reducer, initialState);
+    // case "addItem":
+    //   return {
+    //     ...state.cart,
+    //   };
+    //   return {
+    //     ...state.cart,
+    //     cart: action.payload,
+    //     quantity: ++state.quantity,
+    //   };
 
-  function addItem(item){
-    dispatch(type: 'addItem')
+    // case "clearCart":
+    //   return {
+    //     ...state,
+    //   };
+
+    default:
+      throw new Error("something has happened?");
   }
 }
 
-export default CartProvider;
+function CartProvider({ children }) {
+  const [{ cart, totalAmount, quantity, openCart, closeCart }, dispatch] =
+    useReducer(reducer, initialState);
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        totalAmount,
+        quantity,
+        openCart,
+
+        dispatch,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+}
+
+function useCart() {
+  const context = useContext(CartContext);
+
+  if (context === undefined)
+    throw new Error("CartContext was used outside of the CartProvider");
+
+  return context;
+}
+
+export { CartProvider, useCart };

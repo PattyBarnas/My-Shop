@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Cart from "../features/Cart/Cart";
 import Button from "./Button";
 import styled from "styled-components";
 import CartIcon from "../features/Icons/CartIcon";
 import UserIcon from "../features/Icons/UserIcon";
+
+import { useCart } from "../store/CartContext";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -61,6 +62,7 @@ const StyledDiv = styled.div`
 `;
 
 function NavBar(props) {
+  const dispatch = useCart().dispatch;
   return (
     <StyledNav>
       <LogoDiv>
@@ -75,7 +77,7 @@ function NavBar(props) {
         </StyledList>
 
         <StyledList>
-          <Button onClick={props.onClick}>
+          <Button onClick={() => dispatch({ type: "openCart" })}>
             <StyledDiv>
               <CartIcon />
               <ButtonSpan>Cart</ButtonSpan>

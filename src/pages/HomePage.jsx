@@ -1,20 +1,20 @@
 import React from "react";
 import NavBar from "../ui/NavBar";
+import { useCart } from "../store/CartContext";
+import Cart from "../features/Cart/Cart";
+import Backdrop from "../ui/Backdrop";
 
 function HomePage() {
+  const openCart = useCart().openCart;
+
+  // console.log(openCart);
   return (
     <div>
       <header>
-        <NavBar onClick={true} />
+        <NavBar />
       </header>
-      {/* <main>
-        <button onClick={() => openCartHandler}>Check out!</button> */}
-      {/* {checkout && !closeCart && (
-          <Backdrop onClick={() => setCheckout(!checkout)} />
-        )}
-        {checkout && !closeCart && <Cart />}
-      </main> */}{" "}
-      */}
+      {openCart && <Cart />}
+      {openCart && <Backdrop />}
     </div>
   );
 }
