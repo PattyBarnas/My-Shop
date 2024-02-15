@@ -3,8 +3,9 @@ import Button from "./Button";
 import styled from "styled-components";
 import CartIcon from "../features/Icons/CartIcon";
 import UserIcon from "../features/Icons/UserIcon";
-
-import { useCart } from "../store/CartContext";
+import Cart from "../features/Cart/Cart";
+import Backdrop from "./Backdrop";
+import { useNavigate } from "react-router-dom";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -62,11 +63,20 @@ const StyledDiv = styled.div`
 `;
 
 function NavBar(props) {
-  const dispatch = useCart().dispatch;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  function handleCartOpen() {
+    setIsOpen(!isOpen);
+  }
+
   return (
     <StyledNav>
       <LogoDiv>
-        <span>LOGO x Patty</span>
+        <button onClick={() => navigate("/")}>
+          <span>LOGO x Patty</span>
+        </button>
       </LogoDiv>
       <UL>
         <StyledList>
@@ -77,7 +87,7 @@ function NavBar(props) {
         </StyledList>
 
         <StyledList>
-          <Button onClick={() => dispatch({ type: "openCart" })}>
+          <Button onClick={handleCartOpen}>
             <StyledDiv>
               <CartIcon />
               <ButtonSpan>Cart</ButtonSpan>
@@ -85,6 +95,8 @@ function NavBar(props) {
           </Button>
         </StyledList>
       </UL>
+      {isOpen && <Cart />}
+      {isOpen && <Backdrop onClick={handleCartOpen} />}
     </StyledNav>
   );
 }

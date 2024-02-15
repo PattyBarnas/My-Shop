@@ -1,20 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../ui/NavBar";
 import { useCart } from "../store/CartContext";
-import Cart from "../features/Cart/Cart";
-import Backdrop from "../ui/Backdrop";
+import ProductList from "../features/Products/ProductList";
 
 function HomePage() {
-  const openCart = useCart().openCart;
-
-  // console.log(openCart);
   return (
     <div>
       <header>
         <NavBar />
       </header>
-      {openCart && <Cart />}
-      {openCart && <Backdrop />}
+      <ProductList />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import CartItem from "../Cart/CartItem";
-import Backdrop from "../../ui/Backdrop";
 
 const StyledCart = styled.div`
   position: fixed;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useCart } from "../store/CartContext";
 
 const BackdropStyled = styled.div`
   position: fixed;
@@ -12,14 +11,7 @@ const BackdropStyled = styled.div`
 `;
 
 function Backdrop(props) {
-  const dispatch = useCart().dispatch;
-  return (
-    <BackdropStyled
-      onClick={() => {
-        dispatch({ type: "openCart" });
-      }}
-    />
-  );
+  return <BackdropStyled onClick={props.onClick} />;
 }
 
 export default Backdrop;
