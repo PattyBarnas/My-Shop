@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-const productRoutes = require("./routes/products");
+const productRoutes = require("./routes/product");
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -20,4 +20,4 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message });
 });
 
-app.listen(8080);
+app.listen(8080, () => console.log("Port 8080"));

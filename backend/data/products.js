@@ -12,3 +12,5 @@ async function getAll() {
   }
   return storedData.products;
 }
+
+exports.getAll = getAll;
