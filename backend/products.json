@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "image": "${TShirt}",
+      "title": "Black t-shirt 705 collab.",
+      "color": "Black/White",
+      "size": "Large",
+      "description": "100% cotton original t-shirt",
+      "price": 30.0
+    },
+    {
+      "id": "2",
+      "image": "${TShirt2}",
+      "title": "Clean white t-shirt short sleeve.",
+      "color": "red",
+      "size": "medium",
+      "description": "100% cotton original t-shirt",
+      "price": 26.0
+    },
+    {
+      "id": "3",
+      "image": "${TShirt3}",
+      "title": "KJJXII Original T-shirt",
+      "color": "blue",
+      "size": "small",
+      "description": "100% cotton original t-shirt",
+      "price": 45.0
+    },
+    {
+      "id": "4",
+      "image": "${TShirt4}",
+      "title": "long sleeve T-shirt",
+      "color": "red",
+      "size": "large",
+      "description": "100% cotton original t-shirt",
+      "price": 50.0
+    }
+  ]
+}
