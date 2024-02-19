@@ -14,4 +14,15 @@ const getProducts = async (req, res, next) => {
   });
 };
 
+const getProductById = async (req, res, next) => {
+  let product;
+  try {
+    product = await Product.findById(req.params.prodId);
+  } catch (error) {
+    return next(error);
+  }
+  res.json({ product });
+};
+
 exports.getProducts = getProducts;
+exports.getProductById = getProductById;

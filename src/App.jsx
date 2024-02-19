@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {
         id: "product-detail",
         path: "product/:prodId",
-        // loader: ProductLoader,
+
         children: [
           {
             // index: true,
