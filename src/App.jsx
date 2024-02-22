@@ -7,7 +7,9 @@ import ProductsPage, { loader as ProductLoader } from "./pages/ProductsPage";
 
 import { CartProvider } from "./store/CartContext";
 import LoginPage from "./pages/LoginPage";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProductDetailsPage, {
+  loader as ProductDetailsLoader,
+} from "./pages/ProductDetailsPage";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 
@@ -19,19 +21,18 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-
         element: <ProductsPage />,
         loader: ProductLoader,
       },
       { path: "account/login", element: <LoginPage /> },
       {
-        id: "product-detail",
+        id: "product-details",
         path: "product/:prodId",
-
         children: [
           {
-            // index: true,
-            // element: <ProductsDetailsPage />,
+            index: true,
+            element: <ProductDetailsPage />,
+            loader: ProductDetailsLoader,
           },
         ],
       },
