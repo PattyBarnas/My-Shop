@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../../ui/Button";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import tShirtImg from "../../data/Images/t-shirt-2.jpg";
+import { useCart } from "../../store/CartContext";
 
 const StyledProductItem = styled.li`
   display: flex;
@@ -39,16 +41,25 @@ const Image = styled.img`
   height: 100%;
 `;
 
-const ProductItem = ({ id, title, image, color, size, quantity, price }) => {
-  const params = useParams();
+const ProductItem = ({ product }) => {
+  const { cart, onAddItem } = useCart();
+
   return (
     <StyledProductItem>
-      <div>
-        <Image src={image} alt="T-shirt Image"></Image>
-      </div>
+      <div>{<Image src={tShirtImg} alt="T-shirt Image"></Image>}</div>
       <Description>
-        <Title>{title}</Title>
-        <Price>${price}</Price>
+        <Title>{product.title}</Title>
+        <Price>${product.price}</Price>
+        <p>{product.color}</p>
+        <p>{product.description}</p>
+        <p>{product.size}</p>
+        <button
+          onClick={() => {
+            onAddItem(product);
+          }}
+        >
+          ADD TO CART
+        </button>
       </Description>
     </StyledProductItem>
   );

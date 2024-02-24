@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import CartItem from "../Cart/CartItem";
+import { useCart } from "../../store/CartContext";
 
 const slideIn = keyframes`
 0%{
@@ -31,16 +32,26 @@ const StyledCart = styled.div`
 `;
 
 function Cart({ children }) {
+  const { cart } = useCart();
+
   return (
     <StyledCart>
       <h1>Your Cart</h1>
       <hr />
-      <CartItem
-        title={"Step Dad T-shirt"}
-        size={"Large"}
-        quantity={1}
-        color={"red"}
-      />
+      {cart.map((item) => {
+        return (
+          <CartItem
+            key={item._id}
+            id={item._id}
+            title={item.title}
+            size={item.size}
+            quantity={1}
+            color={item.color}
+            price={item.price}
+          />
+        );
+      })}
+
       <hr />
     </StyledCart>
   );

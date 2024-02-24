@@ -1,66 +1,35 @@
-import { createContext, useReducer, useContext } from "react";
+import {
+  createContext,
+  useReducer,
+  useContext,
+  useState,
+  useMemo,
+} from "react";
 
 const CartContext = createContext();
 
-const initialState = {
-  cart: [],
-  totalAmount: 0,
-  quantity: 0,
-  openCart: false,
-  clearCart: false,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "openCart":
-      return {
-        ...state,
-        openCart: !state.openCart,
-      };
-    // case "closeCart":
-    //   return {
-    //     ...state,
-    //     openCart: false,
-    //   };
-
-    // case "addItem":
-    //   return {
-    //     ...state.cart,
-    //   };
-    //   return {
-    //     ...state.cart,
-    //     cart: action.payload,
-    //     quantity: ++state.quantity,
-    //   };
-
-    // case "clearCart":
-    //   return {
-    //     ...state,
-    //   };
-
-    default:
-      throw new Error("something has happened?");
-  }
-}
-
 function CartProvider({ children }) {
-  const [{ cart, totalAmount, quantity, openCart, closeCart }, dispatch] =
-    useReducer(reducer, initialState);
+  const [cart, setCart] = useState([]);
+  const cartQuantity = cart.length;
 
-  return (
-    <CartContext.Provider
-      value={{
-        cart,
-        totalAmount,
-        quantity,
-        openCart,
+  function handleAddItemToCart(item) {
+    setCart((items) => [...items, item]);
+  }
+  function handleDeleteItemFromCart(id) {
+    const updatedItems = cart.filter((item) => item._id !== id);
 
-        dispatch,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
+    setCart((items) => [...items, updatedItems]);
+  }
+
+  const value = useMemo(() => {
+    return {
+      cart,
+      onAddItem: handleAddItemToCart,
+      onRemoveItem: handleDeleteItemFromCart,
+    };
+  }, [handleAddItemToCart]);
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 function useCart() {

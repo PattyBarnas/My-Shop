@@ -5,11 +5,13 @@ import ProductItem from "./ProductItem";
 
 import styled from "styled-components";
 import "./ProductList.css";
+import tShirtImg from "../../data/Images/t-shirt-2.jpg";
 
 const StyledUL = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   height: 100%;
   width: 95%;
 `;
@@ -46,12 +48,11 @@ const ProductList = ({ products }) => {
   return (
     <div>
       <StyledUL>
-        {console.log(products, "products not found")}
         {products.map((prod) => (
           <li className="product-item" key={prod.id} id={prod.id}>
-            <Link to={`/product/${prod.id}`}>
+            <Link to={`/products/${prod.id}`}>
               <div>
-                <Image src={prod.image} alt={prod.image} />
+                <Image src={tShirtImg} alt={prod.image} />
               </div>
               <Description>
                 <p>{prod.description}</p>

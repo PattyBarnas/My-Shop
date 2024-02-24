@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../../ui/Button";
+import DeleteIcon from "../Icons/DeleteIcon";
+import { useCart } from "../../store/CartContext";
 
 const StyledCartItem = styled.li`
   display: flex;
@@ -18,15 +20,21 @@ const Title = styled.p`
   margin-bottom: 0.6rem;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  height: 100%;
+  width: 100%;
+`;
 
 const Span = styled.span``;
 
-function CartItem({ title, color, size, quantity }) {
+function CartItem({ id, image, price, title, color, size, quantity }) {
+  const { cart, onRemoveItem } = useCart();
   return (
     <StyledCartItem>
       <div>
-        <Image alt="T-shirt Image"></Image>
+        <Image src={image} alt="T-shirt Image">
+          {image}
+        </Image>
       </div>
       <div>
         <Title>{title}</Title>
@@ -36,6 +44,12 @@ function CartItem({ title, color, size, quantity }) {
         <Button>+</Button>
         {quantity}
         <Button>-</Button>
+      </div>
+      <div>
+        <button onClick={() => onRemoveItem(id)}>
+          <DeleteIcon />
+        </button>
+        <p>${price}</p>
       </div>
     </StyledCartItem>
   );
