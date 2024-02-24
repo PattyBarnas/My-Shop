@@ -33,7 +33,9 @@ const StyledCart = styled.div`
 
 function Cart({ children }) {
   const { cart } = useCart();
+  const cartQty = cart.length;
 
+  console.log(cart, "y9o");
   return (
     <StyledCart>
       <h1>Your Cart</h1>
@@ -41,13 +43,13 @@ function Cart({ children }) {
       {cart.map((item) => {
         return (
           <CartItem
-            key={item._id}
-            id={item._id}
-            title={item.title}
-            size={item.size}
-            quantity={1}
-            color={item.color}
-            price={item.price}
+            key={item.product._id}
+            id={item.product._id}
+            title={item.product.title}
+            size={item.product.size}
+            quantity={item.qty}
+            color={item.product.color}
+            price={item.product.price}
           />
         );
       })}

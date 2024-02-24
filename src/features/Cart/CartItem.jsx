@@ -16,7 +16,6 @@ const StyledCartItem = styled.li`
 const Title = styled.p`
   margin: 0;
   font-size: 1rem;
-  background-color: red;
   margin-bottom: 0.6rem;
 `;
 
@@ -29,12 +28,11 @@ const Span = styled.span``;
 
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem } = useCart();
+
   return (
-    <StyledCartItem>
+    <StyledCartItem key={id}>
       <div>
-        <Image src={image} alt="T-shirt Image">
-          {image}
-        </Image>
+        <Image src={image} alt="T-shirt Image" />
       </div>
       <div>
         <Title>{title}</Title>
