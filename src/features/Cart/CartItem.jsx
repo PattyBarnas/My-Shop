@@ -3,15 +3,19 @@ import styled from "styled-components";
 import Button from "../../ui/Button";
 import DeleteIcon from "../Icons/DeleteIcon";
 import { useCart } from "../../store/CartContext";
+import img from "../../data/Images/t-shirt-2.jpg";
 
 const StyledCartItem = styled.li`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   width: 85%;
-  height: 25%;
+  height: 35%;
   list-style: none;
   gap: 1.6rem;
+  margin: 1.2rem auto;
+  overflow: hidden;
+  scroll-behavior: auto;
 `;
 const Title = styled.p`
   margin: 0;
@@ -20,11 +24,51 @@ const Title = styled.p`
 `;
 
 const Image = styled.img`
-  height: 100%;
+  height: 15rem;
   width: 100%;
+  padding: 1.2rem;
 `;
 
-const Span = styled.span``;
+const RemoveBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+`;
+
+const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+`;
+
+const Span = styled.span`
+  color: green;
+  font-size: 1.6rem;
+`;
+
+const QuantitySpan = styled.span`
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 0 1.2rem;
+  border: 1px solid #888;
+  border-radius: 2px;
+  margin: 0 0.6rem;
+`;
+
+const QuantityButtons = styled.button`
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 2rem;
+  cursor: pointer;
+`;
+
+const DescriptionDiv = styled.div`
+  margin: 0 auto;
+`;
 
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem } = useCart();
@@ -32,23 +76,25 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
   return (
     <StyledCartItem key={id}>
       <div>
-        <Image src={image} alt="T-shirt Image" />
+        <Image src={img} alt="T-shirt Image" />
       </div>
-      <div>
+      <DescriptionDiv>
         <Title>{title}</Title>
-        <Span>
+        <p>
           {color} / {size}
-        </Span>
-        <Button>+</Button>
-        {quantity}
-        <Button>-</Button>
-      </div>
-      <div>
-        <button onClick={() => onRemoveItem(id)}>
+        </p>
+        <div>
+          <QuantityButtons>+</QuantityButtons>
+          <QuantitySpan>{quantity}</QuantitySpan>
+          <QuantityButtons>-</QuantityButtons>
+        </div>
+      </DescriptionDiv>
+      <StyledDiv>
+        <RemoveBtn onClick={() => onRemoveItem(id)}>
           <DeleteIcon />
-        </button>
-        <p>${price}</p>
-      </div>
+        </RemoveBtn>
+        <Span>${price}</Span>
+      </StyledDiv>
     </StyledCartItem>
   );
 }

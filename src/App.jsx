@@ -12,6 +12,7 @@ import ProductDetailsPage, {
 } from "./pages/ProductDetailsPage";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
+import "./App.css";
 
 const router = createBrowserRouter([
   {

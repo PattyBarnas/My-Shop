@@ -6,6 +6,7 @@ import UserIcon from "../features/Icons/UserIcon";
 import Cart from "../features/Cart/Cart";
 import Backdrop from "./Backdrop";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../store/CartContext";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -13,7 +14,7 @@ const StyledNav = styled.nav`
 `;
 
 const ButtonSpan = styled.p`
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   text-transform: uppercase;
   font-weight: 600;
   margin: 0;
@@ -45,31 +46,28 @@ const LogoDiv = styled.div`
 
 const StyledAnchor = styled.a`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 0.6rem;
-
   text-transform: uppercase;
   text-decoration: none;
   color: #000;
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   font-weight: 600;
 `;
 
 const StyledDiv = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   gap: 0.6rem;
 `;
 
 function NavBar(props) {
-  const [isOpen, setIsOpen] = useState(false);
-
   const navigate = useNavigate();
+  const { onCartOpen, isOpen } = useCart();
 
-  function handleCartOpen() {
-    setIsOpen(!isOpen);
-  }
+  // console.log(useCart());
 
   return (
     <StyledNav>
@@ -87,7 +85,7 @@ function NavBar(props) {
         </StyledList>
 
         <StyledList>
-          <Button onClick={handleCartOpen}>
+          <Button onClick={() => onCartOpen()}>
             <StyledDiv>
               <CartIcon />
               <ButtonSpan>Cart</ButtonSpan>
@@ -96,7 +94,7 @@ function NavBar(props) {
         </StyledList>
       </UL>
       {isOpen && <Cart />}
-      {isOpen && <Backdrop onClick={handleCartOpen} />}
+      {isOpen && <Backdrop onClick={() => onCartOpen()} />}
     </StyledNav>
   );
 }

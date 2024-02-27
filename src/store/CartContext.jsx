@@ -9,7 +9,8 @@ import {
 const CartContext = createContext();
 
 function CartProvider({ children }) {
-  let [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   function handleAddItemToCart(item) {
@@ -19,10 +20,7 @@ function CartProvider({ children }) {
       (i) => i.product._id === item._id
     );
     const existingItem = updatedCart[existingItemIndex];
-    // console.log(existingItem, existingItemIndex);
-    // if item exists update cart quantity
 
-    console.log(existingItem, " ei");
     if (existingItem) {
       updatedCart[existingItemIndex] = {
         ...existingItem,
@@ -45,11 +43,15 @@ function CartProvider({ children }) {
     // const updatedAmount;
     // if(true)
   }
+  function handleCartOpen() {
+    setIsOpen(!isOpen);
+  }
 
   const value = useMemo(() => {
     return {
       cart,
-
+      isOpen,
+      onCartOpen: handleCartOpen,
       onAddItem: handleAddItemToCart,
       onRemoveItem: handleDeleteItemFromCart,
       onUpdateItem: handleUpdateItemQuantity,
