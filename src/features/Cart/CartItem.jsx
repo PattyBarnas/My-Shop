@@ -24,7 +24,7 @@ const Title = styled.p`
 `;
 
 const Image = styled.img`
-  height: 15rem;
+  height: 20rem;
   width: 100%;
   padding: 1.2rem;
 `;
@@ -70,32 +70,39 @@ const DescriptionDiv = styled.div`
   margin: 0 auto;
 `;
 
+const StlyedHr = styled.hr`
+  width: 90%;
+`;
+
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem } = useCart();
 
   return (
-    <StyledCartItem key={id}>
-      <div>
-        <Image src={img} alt="T-shirt Image" />
-      </div>
-      <DescriptionDiv>
-        <Title>{title}</Title>
-        <p>
-          {color} / {size}
-        </p>
+    <>
+      <StyledCartItem key={id}>
         <div>
-          <QuantityButtons>+</QuantityButtons>
-          <QuantitySpan>{quantity}</QuantitySpan>
-          <QuantityButtons>-</QuantityButtons>
+          <Image src={img} alt="T-shirt Image" />
         </div>
-      </DescriptionDiv>
-      <StyledDiv>
-        <RemoveBtn onClick={() => onRemoveItem(id)}>
-          <DeleteIcon />
-        </RemoveBtn>
-        <Span>${price}</Span>
-      </StyledDiv>
-    </StyledCartItem>
+        <DescriptionDiv>
+          <Title>{title}</Title>
+          <p>
+            {color} / {size}
+          </p>
+          <div>
+            <QuantityButtons>+</QuantityButtons>
+            <QuantitySpan>{quantity}</QuantitySpan>
+            <QuantityButtons>-</QuantityButtons>
+          </div>
+        </DescriptionDiv>
+        <StyledDiv>
+          <RemoveBtn onClick={() => onRemoveItem(id)}>
+            <DeleteIcon />
+          </RemoveBtn>
+          <Span>${price}</Span>
+        </StyledDiv>
+      </StyledCartItem>
+      <StlyedHr />
+    </>
   );
 }
 

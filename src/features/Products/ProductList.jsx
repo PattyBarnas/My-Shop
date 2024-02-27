@@ -14,10 +14,19 @@ const StyledUL = styled.ul`
   flex-wrap: wrap;
   height: 100%;
   width: 95%;
+  text-decoration: none;
+  gap: 1.8rem;
+`;
+
+const StyledLi = styled.li`
+  display: flex;
+  border-radius: 12px;
+  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
 `;
 const Image = styled.img`
-  margin-left: 1.2rem;
-  width: 20rem;
+  width: 45rem;
   height: 100%;
 `;
 const StyledProductItem = styled.li`
@@ -29,7 +38,6 @@ const StyledProductItem = styled.li`
   height: 100%;
   list-style: none;
   gap: 1.6rem;
-  text-decoration: none;
 `;
 const Price = styled.p`
   font-size: 2rem;
@@ -49,8 +57,11 @@ const ProductList = ({ products }) => {
     <div>
       <StyledUL>
         {products.map((prod) => (
-          <li className="product-item" key={prod.id} id={prod.id}>
-            <Link to={`/products/${prod.id}`}>
+          <StyledLi key={prod.id} id={prod.id}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/products/${prod.id}`}
+            >
               <div>
                 <Image src={tShirtImg} alt={prod.image} />
               </div>
@@ -59,7 +70,7 @@ const ProductList = ({ products }) => {
                 <Price>{prod.price}</Price>
               </Description>
             </Link>
-          </li>
+          </StyledLi>
         ))}
       </StyledUL>
     </div>

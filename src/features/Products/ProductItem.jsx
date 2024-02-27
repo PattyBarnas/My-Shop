@@ -7,14 +7,13 @@ import { useCart } from "../../store/CartContext";
 
 const StyledProductItem = styled.li`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 85%;
   height: 100%;
   list-style: none;
   gap: 1.6rem;
-  text-decoration: none;
+  margin: 0 auto;
 `;
 const Title = styled.p`
   margin: 0;
@@ -34,19 +33,24 @@ const Description = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 105%;
 `;
 const Image = styled.img`
-  margin-left: 1.2rem;
-  width: 20rem;
+  display: block;
+  margin-left: auto;
+  width: 65%;
   height: 100%;
+  border-radius: 12px;
+  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
 `;
 
 const ProductItem = ({ product }) => {
-  const { cart, onAddItem } = useCart();
-
+  const { cart, onAddItem, onCartOpen } = useCart();
   return (
     <StyledProductItem>
-      <div>{<Image src={tShirtImg} alt="T-shirt Image"></Image>}</div>
+      <div>
+        <Image src={tShirtImg} alt="T-shirt Image"></Image>
+      </div>
       <Description>
         <Title>{product.title}</Title>
         <Price>${product.price}</Price>
@@ -56,6 +60,7 @@ const ProductItem = ({ product }) => {
         <button
           onClick={() => {
             onAddItem(product);
+            onCartOpen();
           }}
         >
           ADD TO CART

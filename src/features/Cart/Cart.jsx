@@ -42,11 +42,6 @@ function Cart({ children }) {
   const { cart, onCartOpen } = useCart();
   const navigate = useNavigate();
 
-  function handleNavigation() {
-    navigate("/");
-    onCartOpen();
-  }
-
   return (
     <StyledCart>
       <h1>Your Cart</h1>
@@ -68,11 +63,16 @@ function Cart({ children }) {
       ) : (
         <div>
           <StyledCartP>Your Cart is empty! Check out our store.</StyledCartP>
-          <button onClick={handleNavigation}>STORE 👈🏼</button>
+          <button
+            onClick={() => {
+              navigate("/");
+              onCartOpen();
+            }}
+          >
+            STORE 👈🏼
+          </button>
         </div>
       )}
-
-      <hr />
     </StyledCart>
   );
 }
