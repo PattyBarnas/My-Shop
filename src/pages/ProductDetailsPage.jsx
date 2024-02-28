@@ -3,7 +3,7 @@ import ProductItem from "../features/Products/ProductItem";
 import { useLoaderData, Await, defer } from "react-router-dom";
 
 function ProductDetailsPage() {
-  const { product } = useLoaderData("product-detail") || {};
+  const { product } = useLoaderData("product-detail");
   return (
     <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
       <Await resolve={product}>

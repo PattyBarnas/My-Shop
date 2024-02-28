@@ -12,7 +12,7 @@ const StyledCartItem = styled.li`
   width: 85%;
   height: 35%;
   list-style: none;
-  gap: 1.6rem;
+  gap: 2.4rem;
   margin: 1.2rem auto;
   overflow: hidden;
   scroll-behavior: auto;
@@ -75,7 +75,7 @@ const StlyedHr = styled.hr`
 `;
 
 function CartItem({ id, image, price, title, color, size, quantity }) {
-  const { cart, onRemoveItem } = useCart();
+  const { cart, onRemoveItem, onUpdateQuantity } = useCart();
 
   return (
     <>
@@ -89,9 +89,21 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
             {color} / {size}
           </p>
           <div>
-            <QuantityButtons>+</QuantityButtons>
+            <QuantityButtons
+              value="increase"
+              onClick={(e) => {
+                onUpdateQuantity(id, e);
+              }}
+            >
+              +
+            </QuantityButtons>
             <QuantitySpan>{quantity}</QuantitySpan>
-            <QuantityButtons>-</QuantityButtons>
+            <QuantityButtons
+              value="decrease"
+              onClick={(e) => onUpdateQuantity(id, e)}
+            >
+              -
+            </QuantityButtons>
           </div>
         </DescriptionDiv>
         <StyledDiv>

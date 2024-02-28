@@ -36,6 +36,19 @@ const StyledCart = styled.div`
 const StyledCartP = styled.p`
   font-size: 1.8rem;
   font-weight: 500;
+  margin: 4.4rem auto;
+`;
+const StyledPText = styled.p`
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2.2rem;
+`;
+const StyledCartButton = styled.button`
+  padding: 1.6rem;
+  width: 90%;
+  background-color: transparent;
+  font-weight: 700;
+  cursor: pointer;
 `;
 
 function Cart({ children }) {
@@ -62,15 +75,16 @@ function Cart({ children }) {
         })
       ) : (
         <div>
-          <StyledCartP>Your Cart is empty! Check out our store.</StyledCartP>
-          <button
+          <StyledCartP>Your Cart is empty!</StyledCartP>
+          <StyledPText>Add your favorite items to your cart!</StyledPText>
+          <StyledCartButton
             onClick={() => {
               navigate("/");
               onCartOpen();
             }}
           >
-            STORE 👈🏼
-          </button>
+            SHOP NOW 👈🏼
+          </StyledCartButton>
         </div>
       )}
     </StyledCart>

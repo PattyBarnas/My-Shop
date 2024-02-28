@@ -6,9 +6,9 @@ import tShirtImg from "../../data/Images/t-shirt-2.jpg";
 import { useCart } from "../../store/CartContext";
 
 const StyledProductItem = styled.li`
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   width: 85%;
   height: 100%;
   list-style: none;
@@ -33,7 +33,7 @@ const Description = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 105%;
+  width: 100%;
 `;
 const Image = styled.img`
   display: block;
@@ -41,31 +41,53 @@ const Image = styled.img`
   width: 65%;
   height: 100%;
   border-radius: 12px;
-  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 16px 24px rgba(0, 0, 0, 0.1);
+`;
+
+const StyledCartButton = styled.button`
+  padding: 1.4rem 0rem;
+  width: 90%;
+  background-color: #c92a2a;
+  color: #fff;
+  border: 1px solid #c92a2a;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+`;
+
+const StyledProductContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ProductItem = ({ product }) => {
   const { cart, onAddItem, onCartOpen } = useCart();
   return (
     <StyledProductItem>
-      <div>
-        <Image src={tShirtImg} alt="T-shirt Image"></Image>
-      </div>
-      <Description>
-        <Title>{product.title}</Title>
-        <Price>${product.price}</Price>
-        <p>{product.color}</p>
-        <p>{product.description}</p>
-        <p>{product.size}</p>
-        <button
-          onClick={() => {
-            onAddItem(product);
-            onCartOpen();
-          }}
-        >
-          ADD TO CART
-        </button>
-      </Description>
+      <StyledProductContainer>
+        <div>
+          <Image src={tShirtImg} alt="T-shirt Image"></Image>
+        </div>
+        <div></div>
+        <Description>
+          <Title>{product.title}</Title>
+          <Price>${product.price}</Price>
+          <p>{product.color}</p>
+          <p>{product.description}</p>
+          <p>{product.size}</p>
+
+          <StyledCartButton
+            onClick={() => {
+              onAddItem(product);
+              onCartOpen();
+            }}
+          >
+            ADD TO CART
+          </StyledCartButton>
+        </Description>
+      </StyledProductContainer>
     </StyledProductItem>
   );
 };

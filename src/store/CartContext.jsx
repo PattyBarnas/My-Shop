@@ -39,10 +39,36 @@ function CartProvider({ children }) {
     setCart(updatedItems);
   }
 
-  function handleUpdateItemQuantity(item) {
-    // const updatedAmount;
-    // if(true)
+  function handleUpdateCartItemQuantity(id, e) {
+    const updatedCart = [...cart];
+
+    // Find Item In Cart
+    const cartItemIndex = updatedCart.findIndex(
+      (item) => item.product._id === id
+    );
+    const existingCartItem = updatedCart[cartItemIndex];
+    const userInput = e.target.value;
+
+    console.log(existingCartItem);
+
+    if (userInput === "increase") {
+      updatedCart[cartItemIndex] = {
+        ...existingCartItem,
+        qty: setQuantity(++existingCartItem.qty),
+      };
+      console.log(existingCartItem.qty);
+    } else {
+      // if < 0 Delete Item From Cart
+      if (existingCartItem.qty <= 1) {
+        handleDeleteItemFromCart(id);
+      }
+      updatedCart[cartItemIndex] = {
+        ...existingCartItem,
+        qty: setQuantity(--existingCartItem.qty),
+      };
+    }
   }
+
   function handleCartOpen() {
     setIsOpen(!isOpen);
   }
@@ -54,9 +80,9 @@ function CartProvider({ children }) {
       onCartOpen: handleCartOpen,
       onAddItem: handleAddItemToCart,
       onRemoveItem: handleDeleteItemFromCart,
-      onUpdateItem: handleUpdateItemQuantity,
+      onUpdateQuantity: handleUpdateCartItemQuantity,
     };
-  }, [handleAddItemToCart]);
+  }, [handleAddItemToCart, handleUpdateCartItemQuantity]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

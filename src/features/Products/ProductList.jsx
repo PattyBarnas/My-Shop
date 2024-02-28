@@ -21,7 +21,7 @@ const StyledUL = styled.ul`
 const StyledLi = styled.li`
   display: flex;
   border-radius: 12px;
-  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 12px 18px rgba(0, 0, 0, 0.05);
 
   overflow: hidden;
 `;
