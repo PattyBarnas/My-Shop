@@ -13,14 +13,15 @@ function CartProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
-  function handleAddItemToCart(item) {
+  function handleAddItemToCart(item, size) {
+    console.log(size);
     const updatedCart = [...cart];
     const { product, qty } = item;
     const existingItemIndex = updatedCart.findIndex(
       (i) => i.product._id === item._id
     );
     const existingItem = updatedCart[existingItemIndex];
-
+    console.log(item);
     if (existingItem) {
       updatedCart[existingItemIndex] = {
         ...existingItem,
@@ -56,7 +57,6 @@ function CartProvider({ children }) {
         ...existingCartItem,
         qty: setQuantity(++existingCartItem.qty),
       };
-      console.log(existingCartItem.qty);
     } else {
       // if < 0 Delete Item From Cart
       if (existingCartItem.qty <= 1) {

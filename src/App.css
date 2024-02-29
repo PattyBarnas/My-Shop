@@ -6,3 +6,8 @@ body {
   min-height: 100vh;
   line-height: 1.5;
 }
+
+button.active {
+  background-color: #868e96;
+  color: #fff;
+}

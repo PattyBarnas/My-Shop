@@ -32,6 +32,10 @@ const StyledCart = styled.div`
   z-index: 1;
   overflow: scroll;
 `;
+const StyledCartHeader = styled.h1`
+  font-size: 1.8rem;
+  font-weight: 600;
+`;
 
 const StyledCartP = styled.p`
   font-size: 1.8rem;
@@ -51,14 +55,36 @@ const StyledCartButton = styled.button`
   cursor: pointer;
 `;
 
+const StyledCheckoutDiv = styled.div`
+  display: flex;
+  padding: 1.8rem;
+  font-size: 1.6rem;
+  justify-content: space-between;
+`;
+const StyledSubTotal = styled.p``;
+const StyledCheckOutBtn = styled.button`
+  padding: 1.4rem 0rem;
+  width: 93%;
+  background-color: #c92a2a;
+  color: #111;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 2px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
 function Cart({ children }) {
   const { cart, onCartOpen } = useCart();
   const navigate = useNavigate();
+  const totalItemsText = cart.length === 1 ? "item" : "items";
 
   return (
     <StyledCart>
-      <h1>Your Cart</h1>
+      <StyledCartHeader>YOUR CART</StyledCartHeader>
       <hr />
+
       {cart.length > 0 ? (
         cart.map((item) => {
           return (
@@ -85,6 +111,19 @@ function Cart({ children }) {
           >
             SHOP NOW 👈🏼
           </StyledCartButton>
+        </div>
+      )}
+      {cart.length > 0 && (
+        <div>
+          <StyledCheckoutDiv>
+            <StyledSubTotal>
+              Subtotal ({cart.length}) {totalItemsText}
+            </StyledSubTotal>
+            <p> Total: $xxx</p>
+          </StyledCheckoutDiv>
+          <div>
+            <StyledCheckOutBtn>CHECKOUT</StyledCheckOutBtn>
+          </div>
         </div>
       )}
     </StyledCart>

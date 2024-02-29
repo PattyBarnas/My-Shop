@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../ui/Button";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -34,6 +34,7 @@ const Description = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 1.8rem;
 `;
 const Image = styled.img`
   display: block;
@@ -62,25 +63,112 @@ const StyledProductContainer = styled.div`
   justify-content: center;
 `;
 
+const StyledDiv = styled.div`
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  gap: 1.2rem;
+`;
+
+const StyledSizeButton = styled.button`
+  padding: 1.2rem 2.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: #e9ecef;
+  border: none;
+  cursor: pointer;
+`;
+
 const ProductItem = ({ product }) => {
   const { cart, onAddItem, onCartOpen } = useCart();
+
+  const [size, setSize] = useState("small");
+
+  function handleSetSize(e) {
+    const userInput = e.target.id;
+    const userSizeSelected = e.target.value;
+
+    if (userInput === "1") {
+      console.log("ee");
+      setSize(userSizeSelected);
+    }
+    if (userInput === "2") {
+      setSize(userSizeSelected);
+    }
+    if (userInput === "3") {
+      setSize(userSizeSelected);
+    }
+    if (userInput === "4") {
+      setSize(userSizeSelected);
+    }
+    console.log(userSizeSelected);
+  }
+
   return (
     <StyledProductItem>
       <StyledProductContainer>
         <div>
           <Image src={tShirtImg} alt="T-shirt Image"></Image>
         </div>
-        <div></div>
+
         <Description>
           <Title>{product.title}</Title>
           <Price>${product.price}</Price>
+          <p
+            style={{
+              fontSize: `1.4rem`,
+              fontWeight: "500",
+            }}
+          >
+            SELECT SIZE:
+          </p>
+          <StyledDiv>
+            <StyledSizeButton
+              id={1}
+              className={size === "small" ? "active" : ""}
+              value="small"
+              onClick={handleSetSize}
+            >
+              S
+            </StyledSizeButton>
+
+            <StyledSizeButton
+              id={2}
+              className={size === "medium" ? "active" : ""}
+              value="medium"
+              onClick={handleSetSize}
+            >
+              M
+            </StyledSizeButton>
+
+            <StyledSizeButton
+              id={3}
+              className={size === "large" ? "active" : ""}
+              value="large"
+              onClick={handleSetSize}
+            >
+              L
+            </StyledSizeButton>
+
+            <StyledSizeButton
+              id={4}
+              className={size === "x-large" ? "active" : ""}
+              value="x-large"
+              onClick={handleSetSize}
+            >
+              XL
+            </StyledSizeButton>
+          </StyledDiv>
           <p>{product.color}</p>
+
           <p>{product.description}</p>
           <p>{product.size}</p>
 
           <StyledCartButton
             onClick={() => {
-              onAddItem(product);
+              onAddItem(product, size);
               onCartOpen();
             }}
           >
