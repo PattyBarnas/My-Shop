@@ -76,6 +76,7 @@ const StlyedHr = styled.hr`
 
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem, onUpdateQuantity } = useCart();
+  const shirtSize = cart[0].size;
 
   return (
     <>
@@ -86,7 +87,7 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
         <DescriptionDiv>
           <Title>{title}</Title>
           <p>
-            {color} / {size}
+            {color} / {cart[0].size}
           </p>
           <div>
             <QuantityButtons

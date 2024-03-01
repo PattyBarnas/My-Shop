@@ -84,6 +84,7 @@ const StyledSizeButton = styled.button`
 const ProductItem = ({ product }) => {
   const { cart, onAddItem, onCartOpen } = useCart();
 
+  console.log(cart, "cart");
   const [size, setSize] = useState("small");
 
   function handleSetSize(e) {
@@ -91,7 +92,6 @@ const ProductItem = ({ product }) => {
     const userSizeSelected = e.target.value;
 
     if (userInput === "1") {
-      console.log("ee");
       setSize(userSizeSelected);
     }
     if (userInput === "2") {
@@ -103,8 +103,9 @@ const ProductItem = ({ product }) => {
     if (userInput === "4") {
       setSize(userSizeSelected);
     }
-    console.log(userSizeSelected);
   }
+
+  // WORK ON SIZE SELECTION BUG - after adding more items size remains the same
 
   return (
     <StyledProductItem>

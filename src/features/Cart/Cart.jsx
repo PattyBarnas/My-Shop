@@ -78,7 +78,16 @@ const StyledCheckOutBtn = styled.button`
 function Cart({ children }) {
   const { cart, onCartOpen } = useCart();
   const navigate = useNavigate();
-  const totalItemsText = cart.length === 1 ? "item" : "items";
+
+  let totalAmount = cart.reduce((acc, item) => {
+    return (acc += item.price * item.qty);
+  }, 0);
+
+  let totalItemQty = cart.reduce((acc, item) => {
+    return acc + item.qty;
+  }, 0);
+
+  const totalItemsText = totalItemQty === 1 ? "item" : "items";
 
   return (
     <StyledCart>
@@ -117,9 +126,9 @@ function Cart({ children }) {
         <div>
           <StyledCheckoutDiv>
             <StyledSubTotal>
-              Subtotal ({cart.length}) {totalItemsText}
+              Subtotal ({totalItemQty}) {totalItemsText}
             </StyledSubTotal>
-            <p> Total: $xxx</p>
+            <p> Total: ${totalAmount}</p>
           </StyledCheckoutDiv>
           <div>
             <StyledCheckOutBtn>CHECKOUT</StyledCheckOutBtn>

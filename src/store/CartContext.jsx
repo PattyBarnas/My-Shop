@@ -1,9 +1,11 @@
+import { clear } from "localforage";
 import {
   createContext,
   useReducer,
   useContext,
   useState,
   useMemo,
+  useEffect,
 } from "react";
 
 const CartContext = createContext();
@@ -14,25 +16,35 @@ function CartProvider({ children }) {
   const [quantity, setQuantity] = useState(1);
 
   function handleAddItemToCart(item, size) {
-    console.log(size);
     const updatedCart = [...cart];
     const { product, qty } = item;
     const existingItemIndex = updatedCart.findIndex(
       (i) => i.product._id === item._id
     );
     const existingItem = updatedCart[existingItemIndex];
-    console.log(item);
+    // FIX SIZING SELECTIOn UPDATE UI ***
+    //WORK ON TOTAL AMOUNT
+
     if (existingItem) {
+      // console.log(existingItem, "ei");
       updatedCart[existingItemIndex] = {
         ...existingItem,
         qty: ++existingItem.qty,
+        size: size,
+        price: +existingItem.product.price * existingItem.qty,
       };
       setCart(updatedCart);
     } else {
-      setCart((items) => [...items, { product: item, qty: 1 }]);
+      setCart((items) => [
+        ...items,
+        {
+          product: item,
+          price: +item.price,
+          size,
+          qty: 1,
+        },
+      ]);
     }
-
-    console.log(cart);
   }
 
   function handleDeleteItemFromCart(id) {
@@ -42,15 +54,12 @@ function CartProvider({ children }) {
 
   function handleUpdateCartItemQuantity(id, e) {
     const updatedCart = [...cart];
-
     // Find Item In Cart
     const cartItemIndex = updatedCart.findIndex(
       (item) => item.product._id === id
     );
     const existingCartItem = updatedCart[cartItemIndex];
     const userInput = e.target.value;
-
-    console.log(existingCartItem);
 
     if (userInput === "increase") {
       updatedCart[cartItemIndex] = {
@@ -77,6 +86,7 @@ function CartProvider({ children }) {
     return {
       cart,
       isOpen,
+
       onCartOpen: handleCartOpen,
       onAddItem: handleAddItemToCart,
       onRemoveItem: handleDeleteItemFromCart,
