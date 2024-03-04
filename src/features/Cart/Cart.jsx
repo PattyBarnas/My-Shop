@@ -88,7 +88,7 @@ function Cart({ children }) {
   }, 0);
 
   const totalItemsText = totalItemQty === 1 ? "item" : "items";
-
+  console.log(cart, "cart");
   return (
     <StyledCart>
       <StyledCartHeader>YOUR CART</StyledCartHeader>
@@ -97,15 +97,17 @@ function Cart({ children }) {
       {cart.length > 0 ? (
         cart.map((item) => {
           return (
-            <CartItem
-              key={item.product._id}
-              id={item.product._id}
-              title={item.product.title}
-              size={item.product.size}
-              quantity={item.qty}
-              color={item.product.color}
-              price={item.product.price}
-            />
+            <ul key={item.product._id}>
+              <CartItem
+                key={item.product._id}
+                id={item.product._id}
+                title={item.product.title}
+                size={item.size}
+                quantity={item.qty}
+                color={item.product.color}
+                price={item.product.price}
+              />
+            </ul>
           );
         })
       ) : (

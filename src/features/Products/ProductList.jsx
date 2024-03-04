@@ -5,7 +5,7 @@ import ProductItem from "./ProductItem";
 
 import styled from "styled-components";
 import "./ProductList.css";
-import tShirtImg from "../../data/Images/t-shirt-2.jpg";
+import tShirtImg from "../../data/Images/t-shirt.jpg";
 
 const StyledUL = styled.ul`
   display: flex;
@@ -16,6 +16,7 @@ const StyledUL = styled.ul`
   width: 95%;
   text-decoration: none;
   gap: 1.8rem;
+  margin-bottom: 5.4rem;
 `;
 
 const StyledLi = styled.li`
@@ -52,9 +53,18 @@ const Description = styled.div`
   justify-content: center;
 `;
 
+const StyledH3 = styled.h3`
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 500;
+  /* width: 73.5%; */
+  margin: 2.2rem auto;
+`;
+
 const ProductList = ({ products }) => {
   return (
     <div>
+      <StyledH3>Products.</StyledH3>
       <StyledUL>
         {products.map((prod) => (
           <StyledLi key={prod.id} id={prod.id}>

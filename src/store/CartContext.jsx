@@ -14,6 +14,7 @@ function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState("small");
 
   function handleAddItemToCart(item, size) {
     const updatedCart = [...cart];
@@ -22,17 +23,14 @@ function CartProvider({ children }) {
       (i) => i.product._id === item._id
     );
     const existingItem = updatedCart[existingItemIndex];
-    // FIX SIZING SELECTIOn UPDATE UI ***
-    //WORK ON TOTAL AMOUNT
 
     if (existingItem) {
-      // console.log(existingItem, "ei");
-      updatedCart[existingItemIndex] = {
+      return (updatedCart[existingItemIndex] = {
         ...existingItem,
         qty: ++existingItem.qty,
-        size: size,
+        size: (existingItem.size = size),
         price: +existingItem.product.price * existingItem.qty,
-      };
+      });
       setCart(updatedCart);
     } else {
       setCart((items) => [
@@ -45,6 +43,9 @@ function CartProvider({ children }) {
         },
       ]);
     }
+    setSize("small");
+
+    return { updatedCart };
   }
 
   function handleDeleteItemFromCart(id) {
@@ -86,7 +87,8 @@ function CartProvider({ children }) {
     return {
       cart,
       isOpen,
-
+      size,
+      setSize,
       onCartOpen: handleCartOpen,
       onAddItem: handleAddItemToCart,
       onRemoveItem: handleDeleteItemFromCart,

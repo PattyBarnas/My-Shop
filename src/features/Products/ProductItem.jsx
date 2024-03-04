@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from "../../ui/Button";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import tShirtImg from "../../data/Images/t-shirt-2.jpg";
+import tShirtImg from "../../data/Images/t-shirt.jpg";
 import { useCart } from "../../store/CartContext";
 
 const StyledProductItem = styled.li`
@@ -82,10 +82,7 @@ const StyledSizeButton = styled.button`
 `;
 
 const ProductItem = ({ product }) => {
-  const { cart, onAddItem, onCartOpen } = useCart();
-
-  console.log(cart, "cart");
-  const [size, setSize] = useState("small");
+  const { cart, onAddItem, onCartOpen, size, setSize } = useCart();
 
   function handleSetSize(e) {
     const userInput = e.target.id;

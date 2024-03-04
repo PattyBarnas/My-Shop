@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../../ui/Button";
 import DeleteIcon from "../Icons/DeleteIcon";
 import { useCart } from "../../store/CartContext";
-import img from "../../data/Images/t-shirt-2.jpg";
+import img from "../../data/Images/t-shirt.jpg";
 
 const StyledCartItem = styled.li`
   display: flex;
@@ -76,7 +76,8 @@ const StlyedHr = styled.hr`
 
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem, onUpdateQuantity } = useCart();
-  const shirtSize = cart[0].size;
+
+  console.log(size, "caritem");
 
   return (
     <>
@@ -87,7 +88,7 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
         <DescriptionDiv>
           <Title>{title}</Title>
           <p>
-            {color} / {cart[0].size}
+            {color} / {size}
           </p>
           <div>
             <QuantityButtons

@@ -64,6 +64,14 @@ const StyledDiv = styled.div`
   gap: 0.6rem;
 `;
 
+const StyledLogo = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
 function NavBar(props) {
   const navigate = useNavigate();
   const { onCartOpen, isOpen } = useCart();
@@ -73,9 +81,9 @@ function NavBar(props) {
   return (
     <StyledNav>
       <LogoDiv>
-        <button onClick={() => navigate("/")}>
+        <StyledLogo onClick={() => navigate("/")}>
           <span>LOGO x Patty</span>
-        </button>
+        </StyledLogo>
       </LogoDiv>
       <UL>
         <StyledList>
