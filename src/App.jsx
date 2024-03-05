@@ -13,6 +13,7 @@ import ProductDetailsPage, {
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import "./App.css";
+import Checkout from "./features/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         index: true,
         element: <ProductsPage />,
         loader: ProductLoader,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
       {
         path: "products/:prodId",

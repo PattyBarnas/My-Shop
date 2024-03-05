@@ -133,7 +133,9 @@ function Cart({ children }) {
             <p> Total: ${totalAmount}</p>
           </StyledCheckoutDiv>
           <div>
-            <StyledCheckOutBtn>CHECKOUT</StyledCheckOutBtn>
+            <StyledCheckOutBtn onClick={() => navigate("/checkout")}>
+              CHECKOUT
+            </StyledCheckOutBtn>
           </div>
         </div>
       )}

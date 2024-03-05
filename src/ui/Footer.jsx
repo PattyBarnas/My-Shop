@@ -14,7 +14,7 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => {
-  return <StyledFooter>2024 Patryk Barnas</StyledFooter>;
+  return <StyledFooter>© 2024 Patryk Barnas</StyledFooter>;
 };
 
 export default Footer;
