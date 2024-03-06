@@ -4,11 +4,9 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import tShirtImg from "../../data/Images/t-shirt.jpg";
 import { useCart } from "../../store/CartContext";
+import ProductAccordian from "./ProductAccordian";
 
 const StyledProductItem = styled.li`
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   width: 85%;
   height: 100%;
   list-style: none;
@@ -79,6 +77,7 @@ const StyledSizeButton = styled.button`
   background-color: #e9ecef;
   border: none;
   cursor: pointer;
+  margin-bottom: 2.2rem;
 `;
 
 const ProductItem = ({ product }) => {
@@ -101,8 +100,6 @@ const ProductItem = ({ product }) => {
       setSize(userSizeSelected);
     }
   }
-
-  // WORK ON SIZE SELECTION BUG - after adding more items size remains the same
 
   return (
     <StyledProductItem>
@@ -159,10 +156,7 @@ const ProductItem = ({ product }) => {
               XL
             </StyledSizeButton>
           </StyledDiv>
-          <p>{product.color}</p>
-
-          <p>{product.description}</p>
-          <p>{product.size}</p>
+          <ProductAccordian product={product} />
 
           <StyledCartButton
             onClick={() => {

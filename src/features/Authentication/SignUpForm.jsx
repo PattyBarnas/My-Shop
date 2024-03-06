@@ -32,13 +32,13 @@ function SignUpForm(props) {
       <H2>Create an account</H2>
 
       <StyledLabel htmlFor="firstName">First Name</StyledLabel>
-      <StyledInput type="text" id="firstName" name="firstName" />
+      <StyledInput type="text" id="firstName" name="firstName" required />
       <StyledLabel htmlFor="first">Last Name</StyledLabel>
-      <StyledInput type="text" id="lastName" name="lastName" />
+      <StyledInput type="text" id="lastName" name="lastName" required />
       <StyledLabel htmlFor="first">Email</StyledLabel>
-      <StyledInput type="text" id="email" name="email" />
+      <StyledInput type="text" id="email" name="email" required />
       <StyledLabel htmlFor="password">Password</StyledLabel>
-      <StyledInput type="text" id="password" name="password" />
+      <StyledInput type="text" id="password" name="password" required />
       <a>Forgot your password ?</a>
       <div>
         <button>Create</button>

@@ -26,9 +26,9 @@ function LoginForm(props) {
           <H4>Login</H4>
 
           <label htmlFor="first">Email</label>
-          <input type="text" id="email" name="email" />
+          <input type="text" id="email" name="email" required />
           <label htmlFor="password">Password</label>
-          <input type="text" id="password" name="password" />
+          <input type="text" id="password" name="password" required />
           <a>Forgot your password ?</a>
           <div>
             <button className="sign-in-btn">Sign In</button>
