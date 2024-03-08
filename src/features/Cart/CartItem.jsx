@@ -92,19 +92,19 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
           </p>
           <div>
             <QuantityButtons
+              value="decrease"
+              onClick={(e) => onUpdateQuantity(id, e)}
+            >
+              -
+            </QuantityButtons>
+            <QuantitySpan>{quantity}</QuantitySpan>
+            <QuantityButtons
               value="increase"
               onClick={(e) => {
                 onUpdateQuantity(id, e);
               }}
             >
               +
-            </QuantityButtons>
-            <QuantitySpan>{quantity}</QuantitySpan>
-            <QuantityButtons
-              value="decrease"
-              onClick={(e) => onUpdateQuantity(id, e)}
-            >
-              -
             </QuantityButtons>
           </div>
         </DescriptionDiv>
