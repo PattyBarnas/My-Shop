@@ -4,18 +4,33 @@ import styled from "styled-components";
 import "./ProductAccordion.css";
 
 const StyledAccordionButton = styled.button`
-  width: 100%;
+  width: 42%;
   padding: 1.2rem;
-
   display: block;
   margin: 0 auto;
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #888;
-  color: #555;
+  border-bottom: 2px solid #e9ecef;
+  color: #666;
   cursor: pointer;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 1px;
   margin-bottom: 1.6rem;
+  text-transform: uppercase;
+`;
+
+const Div = styled.div`
+  width: 100%;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+`;
+
+const P = styled.p`
+  font-size: 1.2rem;
+  font-weight: 500;
 `;
 
 function ProductAccordian({ product }) {
@@ -46,31 +61,31 @@ function ProductAccordian({ product }) {
   };
 
   return (
-    <>
+    <Div>
       <div>
         <StyledAccordionButton id={1} onClick={handleActiveAccordion}>
           Product Details
         </StyledAccordionButton>
-        <div className={`${isActiveIndex.tab1 ? "active" : "hidden"}`}>
-          <p>{product.color}</p>
-          <p>{product.description}</p>
+        <Div className={`${isActiveIndex.tab1 ? "active" : "hidden"}`}>
+          <P>{product.color}</P>
+          <P>{product.description}</P>
           {/* <p>{product.size}</p> */}
-        </div>
+        </Div>
       </div>
       <div>
         <StyledAccordionButton id={2} onClick={handleActiveAccordion}>
           Shipping Details
         </StyledAccordionButton>
         <div className={`${isActiveIndex.tab2 ? "active" : "hidden"}`}>
-          <p>
+          <P>
             Shipping Time: 2 - 5 weeks Customs Notice: All customers outside of
             the United States are responsible for the customers fees/duties that
             may be charged by their country for import. This amount may vary
             depending on your country.
-          </p>
+          </P>
         </div>
       </div>
-    </>
+    </Div>
   );
 }
 
