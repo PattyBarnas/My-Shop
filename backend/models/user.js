@@ -7,7 +7,7 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   Email: { type: String, required: true },
   Password: { type: String, required: true },
-  price: { type: String, required: true },
+  // cart:{[]}
 });
 
 module.exports = mongoose.model("User", userSchema);

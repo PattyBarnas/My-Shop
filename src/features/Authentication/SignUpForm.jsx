@@ -31,7 +31,7 @@ export default function SignUpForm(props) {
   const errors = useActionData();
 
   return (
-    <Form method="post">
+    <Form method="post" action="/account/signup">
       <StyledForm>
         <H2>Create an account</H2>
         <p>
@@ -63,14 +63,29 @@ export default function SignUpForm(props) {
   );
 }
 
+async function createUser(userData) {
+  const response = await fetch("http://localhost:8080/account/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+}
+
 export async function action({ request }) {
   const formData = await request.formData();
   const firstName = formData.get("firstName");
   const lastName = formData.get("lastName");
   const email = formData.get("email");
   const password = formData.get("password");
+  const userData = {
+    firstName,
+    lastName,
+    email,
+    password,
+  };
   const errors = {};
-  console.log(firstName);
 
   if (typeof firstName !== "string" || firstName.length <= 0) {
     errors.firstName = "must not be empty or a number.";
@@ -87,6 +102,8 @@ export async function action({ request }) {
   if (Object.keys(errors).length) {
     return errors;
   }
+
+  await createUser(userData);
 
   return redirect("/account/login");
 }
