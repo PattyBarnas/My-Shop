@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
+import { useActionData, Form, redirect } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,80 +27,66 @@ const H2 = styled.h2`
   font-weight: 500;
 `;
 
-function SignUpForm(props) {
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+export default function SignUpForm(props) {
+  const errors = useActionData();
 
-  async function handleSubmitSignup(e) {
-    e.preventDefault();
-    const firstName = firstNameRef?.current.value;
-    const lastName = lastNameRef?.current.value;
-    const email = emailRef?.current.value;
-    const password = passwordRef?.current.value;
-
-    const userData = {
-      firstName,
-      lastName,
-      email,
-      password,
-    };
-
-    if (!firstName || !lastName || !email || !password) return;
-    try {
-      useEffect(() => {
-        const response = fetch("localhost:8080/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
-        });
-        // const data = response.json();
-      }, []);
-    } catch (error) {}
-  }
   return (
-    <StyledForm method="post" onSubmit={handleSubmitSignup}>
-      <H2>Create an account</H2>
-
-      <StyledLabel htmlFor="firstName">First Name</StyledLabel>
-      <StyledInput
-        type="text"
-        id="firstName"
-        name="firstName"
-        ref={firstNameRef}
-        required
-      />
-      <StyledLabel htmlFor="first">Last Name</StyledLabel>
-      <StyledInput
-        type="text"
-        id="lastName"
-        name="lastName"
-        required
-        ref={lastNameRef}
-      />
-      <StyledLabel htmlFor="first">Email</StyledLabel>
-      <StyledInput
-        type="text"
-        id="email"
-        name="email"
-        required
-        ref={emailRef}
-      />
-      <StyledLabel htmlFor="password">Password</StyledLabel>
-      <StyledInput
-        type="text"
-        id="password"
-        name="password"
-        required
-        ref={passwordRef}
-      />
-      <a>Forgot your password ?</a>
-      <div>
-        <button onClick={handleSubmitSignup}>Create</button>
-      </div>
-    </StyledForm>
+    <Form method="post">
+      <StyledForm>
+        <H2>Create an account</H2>
+        <p>
+          <StyledLabel htmlFor="firstName">First Name</StyledLabel>
+          <StyledInput type="text" id="firstName" name="firstName" />
+          {errors?.firstName && <span>{errors.firstName}</span>}
+        </p>
+        <p>
+          <StyledLabel htmlFor="first">Last Name</StyledLabel>
+          <StyledInput type="text" id="lastName" name="lastName" />
+          {errors?.lastName && <span>{errors.lastName}</span>}
+        </p>
+        <p>
+          <StyledLabel htmlFor="first">Email</StyledLabel>
+          <StyledInput type="text" id="email" name="email" />
+          {errors?.email && <span>{errors.email}</span>}
+        </p>
+        <p>
+          <StyledLabel htmlFor="password">Password</StyledLabel>
+          <StyledInput type="text" id="password" name="password" />
+          {errors?.password && <span>{errors.password}</span>}
+        </p>
+        <a>Forgot your password ?</a>
+        <div>
+          <button type="submit">Create</button>
+        </div>
+      </StyledForm>
+    </Form>
   );
 }
 
-export default SignUpForm;
+export async function action({ request }) {
+  const formData = await request.formData();
+  const firstName = formData.get("firstName");
+  const lastName = formData.get("lastName");
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const errors = {};
+  console.log(firstName);
+
+  if (typeof firstName !== "string" || firstName.length <= 0) {
+    errors.firstName = "must not be empty or a number.";
+  }
+  if (typeof lastName !== "string" || lastName.length <= 0) {
+    errors.lastName = "must not be empty or a number.";
+  }
+  if (typeof email !== "string" || !email.includes("@")) {
+    errors.email = "email must include an @ symbol.";
+  }
+  if (typeof password !== "string" || password.length < 6) {
+    errors.password = "password must be at least 6 characters.";
+  }
+  if (Object.keys(errors).length) {
+    return errors;
+  }
+
+  return redirect("/account/login");
+}
