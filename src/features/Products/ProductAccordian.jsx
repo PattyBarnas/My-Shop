@@ -51,9 +51,7 @@ function ProductAccordian({ product }) {
       setIsActiveIndex({ tab1: !isActiveIndex.tab1 });
     }
     if (userInput === "2") {
-      setIsActiveIndex({
-        tab2: !isActiveIndex.tab2,
-      });
+      setIsActiveIndex({ tab2: !isActiveIndex.tab2 });
     }
 
     // setIsActiveIndex(userInput);
