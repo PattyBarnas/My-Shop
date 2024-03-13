@@ -64,13 +64,20 @@ export default function SignUpForm(props) {
 }
 
 async function createUser(userData) {
-  const response = await fetch("http://localhost:8080/account/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
+  try {
+    const response = await fetch("http://localhost:8080/account/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+      throw new Error("Signing up failed, please try again.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function action({ request }) {
@@ -79,12 +86,14 @@ export async function action({ request }) {
   const lastName = formData.get("lastName");
   const email = formData.get("email");
   const password = formData.get("password");
+
   const userData = {
     firstName,
     lastName,
     email,
     password,
   };
+
   const errors = {};
 
   if (typeof firstName !== "string" || firstName.length <= 0) {

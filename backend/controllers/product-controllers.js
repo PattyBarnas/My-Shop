@@ -18,7 +18,6 @@ const getProductById = async (req, res, next) => {
   let product;
   try {
     product = await Product.findById(req.params.prodId);
-    console.log(product, "eeeeeee");
   } catch (error) {
     return next(error);
   }
