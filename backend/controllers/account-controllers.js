@@ -9,43 +9,45 @@ const createUser = async (req, res, next) => {
   const errors = {};
   const isValidEmail = validator.validate(userData.email);
   const isValidPassword = passwordValidate(userData.password);
-  const exisitingUser = await User.findOne({ email: userData.email });
-  let user;
 
-  try {
-    if (!isValidEmail) {
-      console.log("invalid");
-      errors.email = "Invalid email.";
-      res.status(401).json({ errors });
-    } else {
+  if (!isValidEmail) {
+    errors.email = "Invalid email.";
+  } else {
+    try {
+      const exisitingUser = await User.findOne({ email: userData.email });
+
       if (exisitingUser) {
         errors.email = "Email already exists.";
-        res.json({ error });
+        return res.status(401).send("email already exists");
       }
-    }
+    } catch (error) {}
+  }
 
-    if (!isValidPassword) {
-      errors.password = "Password must be atleast 6 characters long";
-      res.json({ error });
-    }
+  if (!isValidPassword) {
+    errors.password = "Password must be atleast 6 characters long";
+  }
+  try {
+    const createdUser = await new User(userData);
 
-    try {
-      user = await new User(userData);
-      let token = jwt.sign({ token: userData.email }, "secret", {
+    let authToken = jwt.sign(
+      { firstName: createdUser.firstName, email: createdUser.email },
+      "secret",
+      {
         expiresIn: "1h",
-      });
-      console.log(token);
-      await user.save();
+      }
+    );
 
-      res.send({ token });
-    } catch (error) {
-      errors.error = "Failed to save user, please try again.";
-    }
+    await createdUser.save();
+    return res
+      .status(201)
+      .json({ user: createdUser, message: "User created", token: authToken });
+  } catch (error) {
+    next(error);
+  }
 
-    if (Object.keys(errors).length > 0) {
-      res.send("Authentication failed.", { errors });
-    }
-  } catch (error) {}
+  if (Object.keys(errors).length > 0) {
+    return res.json({ message: "Authentication failed.", errors });
+  }
 
   res.send("/account/login");
 };

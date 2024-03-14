@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "../../ui/NavBar";
 import styled from "styled-components";
-import SignUpForm from "./SignUpForm";
 
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +31,9 @@ function LoginForm(props) {
         <input type="text" id="password" name="password" required />
         <a>Forgot your password ?</a>
         <div>
-          <button className="sign-in-btn">Sign In</button>
+          <button type="submit" className="sign-in-btn">
+            Sign In
+          </button>
           <button onClick={() => navigate("/account/signup")}>Sign Up</button>
         </div>
       </StyledForm>

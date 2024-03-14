@@ -1,12 +1,5 @@
 import { clear } from "localforage";
-import {
-  createContext,
-  useReducer,
-  useContext,
-  useState,
-  useMemo,
-  useEffect,
-} from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
 
 const CartContext = createContext();
 
