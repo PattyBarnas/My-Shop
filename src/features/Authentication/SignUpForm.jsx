@@ -30,6 +30,9 @@ const H2 = styled.h2`
 export default function SignUpForm(props) {
   const errors = useActionData();
 
+  // SIGN UP FORM VALIDATION NEEDS TO BE FIXED
+  //  -inputs think everything is a string even when numbers are typed
+
   return (
     <Form method="post" action="/account/signup">
       <StyledForm>
@@ -86,6 +89,7 @@ export async function action({ request }) {
   const lastName = formData.get("lastName");
   const email = formData.get("email");
   const password = formData.get("password");
+  console.log(firstName);
 
   const userData = {
     firstName,
