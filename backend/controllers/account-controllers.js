@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res, next) => {
   const userData = req.body;
-  const errors = {};
+  let errors = {};
+
   const isValidEmail = validator.validate(userData.email);
   const isValidPassword = passwordValidate(userData.password);
 
@@ -18,7 +19,6 @@ const createUser = async (req, res, next) => {
 
       if (exisitingUser) {
         errors.email = "Email already exists.";
-        return res.status(401).send("email already exists");
       }
     } catch (error) {}
   }
@@ -37,16 +37,16 @@ const createUser = async (req, res, next) => {
       }
     );
 
+    if (Object.keys(errors).length > 0) {
+      return res.json({ message: "Signing up failed.", errors });
+    }
+
     await createdUser.save();
     return res
       .status(201)
       .json({ user: createdUser, message: "User created", token: authToken });
   } catch (error) {
     next(error);
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return res.json({ message: "Authentication failed.", errors });
   }
 
   res.send("/account/login");

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useActionData, Form, redirect } from "react-router-dom";
 import styled from "styled-components";
 
@@ -29,7 +29,6 @@ const H2 = styled.h2`
 
 export default function SignUpForm(props) {
   const errors = useActionData();
-
   // SIGN UP FORM VALIDATION NEEDS TO BE FIXED
   //  -inputs think everything is a string even when numbers are typed
 
@@ -37,6 +36,7 @@ export default function SignUpForm(props) {
     <Form method="post" action="/account/signup">
       <StyledForm>
         <H2>Create an account</H2>
+
         <p>
           <StyledLabel htmlFor="firstName">First Name</StyledLabel>
           <StyledInput type="text" id="firstName" name="firstName" />
@@ -66,22 +66,8 @@ export default function SignUpForm(props) {
   );
 }
 
-async function createUser(userData) {
-  try {
-    const response = await fetch("http://localhost:8080/account/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-    if (!response.ok) {
-      throw new Error("Signing up failed, please try again.");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
+async function createUser(userData) {}
+// console.log(errors);
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -89,16 +75,13 @@ export async function action({ request }) {
   const lastName = formData.get("lastName");
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log(firstName);
-
+  let errors = {};
   const userData = {
     firstName,
     lastName,
     email,
     password,
   };
-
-  const errors = {};
 
   if (typeof firstName !== "string" || firstName.length <= 0) {
     errors.firstName = "must not be empty or a number.";
@@ -112,11 +95,40 @@ export async function action({ request }) {
   if (typeof password !== "string" || password.length < 6) {
     errors.password = "password must be at least 6 characters.";
   }
-  if (Object.keys(errors).length) {
+
+  try {
+    const response = await fetch("http://localhost:8080/account/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+      throw new Error("Signing up failed, please try again.");
+    }
+
+    if (response.status === 422 || response.status === 401) {
+      return response;
+    }
+    const resData = await response.json();
+    console.log(resData, "resData");
+    if (Object.keys(resData.errors).length > 0) {
+      errors.email.existing = "email already exists.";
+    }
+
+    const token = resData.token;
+    localStorage.setItem("token", token);
+    // ADD EXPIRATION DATA function
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (Object.keys(errors).length > 0) {
     return errors;
   }
 
   await createUser(userData);
 
-  return redirect("/account/login");
+  return redirect("/");
 }
