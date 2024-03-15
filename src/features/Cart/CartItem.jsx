@@ -75,7 +75,14 @@ const StlyedHr = styled.hr`
   width: 90%;
 `;
 
-const itemDeletedNotify = () => toast("Item has been removed from cart.");
+const itemDeletedNotify = () =>
+  toast.success("Item has been removed from cart.", {
+    style: {
+      minWidth: "250px",
+      height: "4rem",
+      fontSize: "1.4rem",
+    },
+  });
 
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem, onUpdateQuantity } = useCart();

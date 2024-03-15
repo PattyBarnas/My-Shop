@@ -3,6 +3,8 @@ const User = require("../models/user");
 const validator = require("email-validator");
 const { passwordValidate } = require("../util/validators");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const createUser = async (req, res, next) => {
   const userData = req.body;
@@ -41,7 +43,15 @@ const createUser = async (req, res, next) => {
       return res.json({ message: "Signing up failed.", errors });
     }
 
-    await createdUser.save();
+    try {
+      bcrypt.hash(createdUser.password, saltRounds, async function (err, hash) {
+        console.log(err, hash, "inisde fuinction", createdUser.password);
+        createdUser.password = hash;
+
+        await createdUser.save();
+      });
+    } catch (error) {}
+
     return res
       .status(201)
       .json({ user: createdUser, message: "User created", token: authToken });
@@ -50,6 +60,10 @@ const createUser = async (req, res, next) => {
   }
 
   res.send("/account/login");
+};
+
+const login = async (req, res, next) => {
+  const userData = body.req;
 };
 
 exports.createUser = createUser;
