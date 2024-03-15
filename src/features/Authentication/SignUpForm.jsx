@@ -112,9 +112,14 @@ export async function action({ request }) {
       return response;
     }
     const resData = await response.json();
-    console.log(resData, "resData");
+
     if (Object.keys(resData.errors).length > 0) {
-      errors.email.existing = "email already exists.";
+      resData.errors;
+    }
+    if (resData.errors.email === "Email already exists.") {
+      errors.email = "email already exists.";
+    } else {
+      errors.email = "email must include an @ symbol.";
     }
 
     const token = resData.token;

@@ -4,6 +4,7 @@ import Button from "../../ui/Button";
 import DeleteIcon from "../Icons/DeleteIcon";
 import { useCart } from "../../store/CartContext";
 import img from "../../data/Images/t-shirt.jpg";
+import toast from "react-hot-toast";
 
 const StyledCartItem = styled.li`
   display: flex;
@@ -74,10 +75,10 @@ const StlyedHr = styled.hr`
   width: 90%;
 `;
 
+const itemDeletedNotify = () => toast("Item has been removed from cart.");
+
 function CartItem({ id, image, price, title, color, size, quantity }) {
   const { cart, onRemoveItem, onUpdateQuantity } = useCart();
-
-  console.log(size, "caritem");
 
   return (
     <>
@@ -109,7 +110,12 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
           </div>
         </DescriptionDiv>
         <StyledDiv>
-          <RemoveBtn onClick={() => onRemoveItem(id)}>
+          <RemoveBtn
+            onClick={() => {
+              onRemoveItem(id);
+              itemDeletedNotify("Here is your toast.");
+            }}
+          >
             <DeleteIcon />
           </RemoveBtn>
           <Span>${price}</Span>
