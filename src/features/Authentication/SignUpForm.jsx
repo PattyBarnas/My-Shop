@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useActionData, Form, redirect } from "react-router-dom";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 const StyledForm = styled.div`
   display: flex;
@@ -33,10 +34,9 @@ export default function SignUpForm(props) {
   //  -inputs think everything is a string even when numbers are typed
 
   return (
-    <Form method="post" action="/account/signup">
+    <Form method="POST" action="/account/signup">
       <StyledForm>
         <H2>Create an account</H2>
-
         <p>
           <StyledLabel htmlFor="firstName">First Name</StyledLabel>
           <StyledInput type="text" id="firstName" name="firstName" />
@@ -54,7 +54,7 @@ export default function SignUpForm(props) {
         </p>
         <p>
           <StyledLabel htmlFor="password">Password</StyledLabel>
-          <StyledInput type="text" id="password" name="password" />
+          <StyledInput type="password" id="password" name="password" />
           {errors?.password && <span>{errors.password}</span>}
         </p>
         <a>Forgot your password ?</a>
@@ -66,16 +66,15 @@ export default function SignUpForm(props) {
   );
 }
 
-async function createUser(userData) {}
-// console.log(errors);
-
 export async function action({ request }) {
   const formData = await request.formData();
   const firstName = formData.get("firstName");
   const lastName = formData.get("lastName");
   const email = formData.get("email");
   const password = formData.get("password");
+
   let errors = {};
+
   const userData = {
     firstName,
     lastName,
@@ -112,23 +111,23 @@ export async function action({ request }) {
       return response;
     }
     const resData = await response.json();
-    console.log(resData, "resData");
-    if (resData.errors.email === "Email already exists.") {
-      errors.email = "email already exists.";
+
+    if (resData.errors) {
+      errors.email = resData.errors.email;
     }
 
     const token = resData.token;
+    console.log(token);
     localStorage.setItem("token", token);
     // ADD EXPIRATION DATA function
-  } catch (error) {
-    console.log(error);
-  }
+    const expiration = new Date().getHours();
+  } catch (error) {}
 
   if (Object.keys(errors).length > 0) {
+    toast.error("Signing up failed, please try again.");
     return errors;
   }
-
-  await createUser(userData);
+  toast.success("Sign up has completed, welcome!");
 
   return redirect("/");
 }

@@ -29,7 +29,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(uri)
   .then(() => {
-    app.listen(8080, () => console.log("Port 8080"));
+    app.listen(8080, () => console.log("Port 8080."));
   })
   .catch((err) => {
     console.log(err);

@@ -18,7 +18,7 @@ const H4 = styled.h4`
   font-weight: 500;
 `;
 
-function LoginForm(props) {
+export default function LoginForm(props) {
   const navigate = useNavigate();
   return (
     <>
@@ -34,12 +34,12 @@ function LoginForm(props) {
           <button type="submit" className="sign-in-btn">
             Sign In
           </button>
-          <button onClick={() => navigate("/account/signup")}>Sign Up</button>
+          <button type="submit" onClick={() => navigate("/account/signup")}>
+            Sign Up
+          </button>
         </div>
       </StyledForm>
       }
     </>
   );
 }
-
-export default LoginForm;

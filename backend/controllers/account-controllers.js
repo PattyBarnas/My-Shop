@@ -14,7 +14,7 @@ const createUser = async (req, res, next) => {
   const isValidPassword = passwordValidate(userData.password);
 
   if (!isValidEmail) {
-    errors.email = "Invalid email.";
+    errors.email = "Email must not be empty, must include an @.";
   } else {
     try {
       const exisitingUser = await User.findOne({ email: userData.email });
@@ -45,10 +45,8 @@ const createUser = async (req, res, next) => {
 
     try {
       bcrypt.hash(createdUser.password, saltRounds, async function (err, hash) {
-        console.log(err, hash, "inisde fuinction", createdUser.password);
         createdUser.password = hash;
-
-        await createdUser.save();
+        createdUser.save();
       });
     } catch (error) {}
 
@@ -59,7 +57,7 @@ const createUser = async (req, res, next) => {
     next(error);
   }
 
-  res.send("/account/login");
+  res.send("/");
 };
 
 const login = async (req, res, next) => {
@@ -67,3 +65,4 @@ const login = async (req, res, next) => {
 };
 
 exports.createUser = createUser;
+exports.login = login;
