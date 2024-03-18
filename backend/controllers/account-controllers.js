@@ -61,7 +61,21 @@ const createUser = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const userData = body.req;
+  const userData = req.body;
+
+  let user;
+  try {
+    user = await User.findOne({ email: userData.email });
+    if (!user) {
+      return res.status(404).send("User was not found. Email does not exist.");
+    }
+    const match = await bcrypt.compare(userData.password, user.password);
+
+    if (!match) {
+      return res.status(401).send("Password was incorrect, please try again.");
+    }
+  } catch (error) {}
+  return res.status(201).send("/");
 };
 
 exports.createUser = createUser;

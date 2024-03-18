@@ -9,6 +9,7 @@ import { CartProvider } from "./store/CartContext";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { action as createUserAction } from "./features/Authentication/SignUpForm";
+import { action as userLoginAction } from "./features/Authentication/LoginForm";
 import ProductDetailsPage, {
   loader as ProductDetailsLoader,
 } from "./pages/ProductDetailsPage";
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
         loader: ProductDetailsLoader,
         element: <ProductDetailsPage />,
       },
-      { path: "account/login", element: <LoginPage /> },
+      {
+        path: "account/login",
+        element: <LoginPage />,
+        action: userLoginAction,
+      },
       {
         path: "account/signup",
         element: <SignUpPage />,
