@@ -120,7 +120,13 @@ export async function action({ request }) {
     console.log(token);
     localStorage.setItem("token", token);
     // ADD EXPIRATION DATA function
-    const expiration = new Date().getHours();
+
+    const expiration = new Date();
+
+    expiration.setHours(expiration.getHours() + 1);
+    console.log(expiration);
+
+    localStorage.setItem("expiration", expiration.toISOString());
   } catch (error) {}
 
   if (Object.keys(errors).length > 0) {

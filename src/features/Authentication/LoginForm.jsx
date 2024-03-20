@@ -100,9 +100,17 @@ export async function action({ request }) {
       return errors;
     }
 
-    // const token = resData.token;
-    // console.log(token);
-    // localStorage.setItem("token", token);
+    const token = resData.token;
+
+    localStorage.setItem("token", token);
+
+    const expiration = new Date();
+
+    expiration.setHours(expiration.getHours() + 1);
+    console.log(expiration);
+
+    localStorage.setItem("expiration", expiration.toISOString());
+
     // ADD EXPIRATION DATA function
     // const expiration = new Date().getHours();
   } catch (error) {}

@@ -85,13 +85,24 @@ const login = async (req, res, next) => {
     if (user && !match) {
       errors.password = "Password was incorrect, please try again.";
     }
-  } catch (error) {}
 
+    let authToken = jwt.sign(
+      { firstName: user.firstName, email: user.email },
+      "secret",
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    return res.status(201).json({
+      user,
+      message: "user login was successful.",
+      token: authToken,
+    });
+  } catch (error) {}
   if (Object.keys(errors).length > 0) {
     return res.json({ message: "login failed, please try again", errors });
   }
-
-  return res.status(201).send("/");
 };
 
 exports.createUser = createUser;
