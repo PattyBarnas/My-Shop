@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Form, redirect, useActionData } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { clear } from "localforage";
 
 const StyledForm = styled.div`
   display: flex;
@@ -32,7 +34,7 @@ export default function LoginForm(props) {
         {errors?.email && <span>{errors.email}</span>}
 
         <label htmlFor="password">Password</label>
-        <input type="text" id="password" name="password" required />
+        <input type="text" id="password" name="password" />
         {errors?.password && <span>{errors.password}</span>}
         <a>Forgot your password ?</a>
         <div>
@@ -58,21 +60,26 @@ export async function action({ request }) {
     password,
   };
 
-  if (typeof email !== "string" || !email.includes("@")) {
-    errors.email = "email must include an @ symbol.";
+  if (
+    typeof email !== "string" ||
+    !email.includes("@") ||
+    email.trim().length <= 0
+  ) {
+    errors.email = "email must include an @ symbol or cannot be empty.";
   }
   if (typeof password !== "string" || password.length < 6) {
     errors.password = "password must be at least 6 characters.";
   }
 
   try {
-    const response = await fetch("http://localhost:8080/account/signup", {
+    const response = await fetch("http://localhost:8080/account/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
     });
+
     if (!response.ok) {
       throw new Error("Signing up failed, please try again.");
     }
@@ -82,8 +89,13 @@ export async function action({ request }) {
     }
     const resData = await response.json();
 
-    if (Object.keys(resData.errors).length > 0) {
-      return console.log(Object.keys(resData.errors));
+    if (resData.errors) {
+      // console.log(resData);
+      errors.email = resData?.errors?.email;
+      errors.password = resData?.errors?.password;
+      // toast.error("Login failed, please try again.");
+
+      return errors;
     }
 
     // const token = resData.token;
@@ -91,6 +103,18 @@ export async function action({ request }) {
     // localStorage.setItem("token", token);
     // ADD EXPIRATION DATA function
     // const expiration = new Date().getHours();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error, "skrt");
+  }
+
+  // errors = resData.errors;
+
+  if (Object.keys(errors).length > 0) {
+    toast.error("Login failed, please try again.");
+    console.log(errors);
+    return errors;
+  }
+  toast.success("User has been authenticated.");
+
   return redirect("/");
 }

@@ -62,19 +62,31 @@ const createUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const userData = req.body;
+  const isValidPassword = passwordValidate(req.body.password);
+  let errors = {};
 
   let user;
+
   try {
     user = await User.findOne({ email: userData.email });
+
+    if (!isValidPassword) {
+      errors.password = "Password must not be empty.";
+    }
     if (!user) {
-      return res.status(404).send("User was not found. Email does not exist.");
+      errors.email = "User was not found. email does not exist.";
     }
     const match = await bcrypt.compare(userData.password, user.password);
 
-    if (!match) {
-      return res.status(401).send("Password was incorrect, please try again.");
+    if (user && !match) {
+      errors.password = "Password was incorrect, please try again.";
     }
   } catch (error) {}
+
+  if (Object.keys(errors).length > 0) {
+    return res.json({ message: "login failed, please try again", errors });
+  }
+
   return res.status(201).send("/");
 };
 
