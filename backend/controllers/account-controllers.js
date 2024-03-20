@@ -63,6 +63,8 @@ const createUser = async (req, res, next) => {
 const login = async (req, res, next) => {
   const userData = req.body;
   const isValidPassword = passwordValidate(req.body.password);
+  const isValidEmail = validator.validate(userData.email);
+
   let errors = {};
 
   let user;
@@ -73,8 +75,10 @@ const login = async (req, res, next) => {
     if (!isValidPassword) {
       errors.password = "Password must not be empty.";
     }
+
     if (!user) {
-      errors.email = "User was not found. email does not exist.";
+      errors.email =
+        "User was not found. email must include an @ or not be empty.";
     }
     const match = await bcrypt.compare(userData.password, user.password);
 

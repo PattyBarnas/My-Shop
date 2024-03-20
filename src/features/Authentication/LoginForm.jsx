@@ -34,7 +34,7 @@ export default function LoginForm(props) {
         {errors?.email && <span>{errors.email}</span>}
 
         <label htmlFor="password">Password</label>
-        <input type="text" id="password" name="password" />
+        <input type="password" id="password" name="password" />
         {errors?.password && <span>{errors.password}</span>}
         <a>Forgot your password ?</a>
         <div>
@@ -89,11 +89,13 @@ export async function action({ request }) {
     }
     const resData = await response.json();
 
-    if (resData.errors) {
+    if (resData?.errors) {
       // console.log(resData);
       errors.email = resData?.errors?.email;
       errors.password = resData?.errors?.password;
-      // toast.error("Login failed, please try again.");
+      toast.error("Login failed, please try again.", {
+        duration: 1500,
+      });
 
       return errors;
     }
@@ -103,9 +105,7 @@ export async function action({ request }) {
     // localStorage.setItem("token", token);
     // ADD EXPIRATION DATA function
     // const expiration = new Date().getHours();
-  } catch (error) {
-    console.log(error, "skrt");
-  }
+  } catch (error) {}
 
   // errors = resData.errors;
 
