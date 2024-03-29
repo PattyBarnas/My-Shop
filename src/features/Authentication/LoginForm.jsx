@@ -17,34 +17,98 @@ const StyledForm = styled.div`
 `;
 
 const H4 = styled.h4`
-  font-size: 2.2rem;
+  font-size: 3.2rem;
   font-weight: 500;
 `;
+const Button = styled.button`
+  padding: 1rem 1.4rem;
+  border-radius: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  background-color: #228be6;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 1.6rem;
+`;
+const Button2 = styled.button`
+  padding: 1rem 1.4rem;
+  border-radius: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  color: #555;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+`;
+const FormContainer = styled.div`
+  background-color: #f8f9fa;
+  width: 30%;
+  padding: 2.6rem 0;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+`;
 
+const Input = styled.input`
+  border-radius: 3px;
+  border: 2px solid #999;
+  padding: 0.8rem 0;
+  width: 40%;
+  margin-bottom: 1rem;
+`;
+
+const StyledAnchor = styled.a`
+  color: #1971c2;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+`;
 export default function LoginForm(props) {
   const navigate = useNavigate();
   const errors = useActionData();
   return (
-    <Form method="POST" action="/account/login">
-      <StyledForm>
-        <H4>Login</H4>
+    <FormContainer>
+      <Form method="POST" action="/account/login">
+        <StyledForm>
+          <H4>Sign In</H4>
 
-        <label htmlFor="first">Email</label>
-        <input type="text" id="email" name="email" />
-        {errors?.email && <span>{errors.email}</span>}
+          <label htmlFor="first">Email</label>
+          <Input
+            className={errors?.email ? "error" : "no-error"}
+            type="text"
+            id="email"
+            name="email"
+          />
+          {errors?.email && <span>{errors.email}</span>}
 
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" />
-        {errors?.password && <span>{errors.password}</span>}
-        <a>Forgot your password ?</a>
-        <div>
-          <button type="submit" className="sign-in-btn">
-            Sign In
-          </button>
-          <button onClick={() => navigate("/account/signup")}>Sign Up</button>
-        </div>
-      </StyledForm>
-    </Form>
+          <label htmlFor="password">Password</label>
+          <Input
+            className={errors?.password ? "error" : "no-error"}
+            type="password"
+            id="password"
+            name="password"
+          />
+          {errors?.password && <span>{errors.password}</span>}
+          <ButtonContainer>
+            <Button type="submit" className="sign-in-btn">
+              Sign In
+            </Button>
+            <Button2 onClick={() => navigate("/account/signup")}>
+              Create an account
+            </Button2>
+          </ButtonContainer>
+          <StyledAnchor>Forgot your password?</StyledAnchor>
+        </StyledForm>
+      </Form>
+    </FormContainer>
   );
 }
 

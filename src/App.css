@@ -16,3 +16,10 @@ button.active {
   background-color: #868e96;
   color: #fff;
 }
+
+.error {
+  background-color: #ffc9c9;
+}
+.no-error {
+  background-color: transparent;
+}
