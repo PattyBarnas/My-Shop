@@ -60,9 +60,10 @@ const FormContainer = styled.div`
 const Input = styled.input`
   border-radius: 3px;
   border: 2px solid #999;
-  padding: 0.8rem 0;
+  padding: 0.8rem 1rem;
   width: 40%;
   margin-bottom: 1rem;
+  margin-left: 1rem;
 `;
 
 const StyledAnchor = styled.a`
@@ -70,6 +71,17 @@ const StyledAnchor = styled.a`
   cursor: pointer;
   font-weight: 500;
   margin-bottom: 1.2rem;
+`;
+
+const Span = styled.span`
+  font-size: 1.4rem;
+  letter-spacing: 0.8px;
+  color: red;
+`;
+
+const Label = styled.label`
+  font-size: 1.7rem;
+  font-weight: 500;
 `;
 export default function LoginForm(props) {
   const navigate = useNavigate();
@@ -80,23 +92,23 @@ export default function LoginForm(props) {
         <StyledForm>
           <H4>Sign In</H4>
 
-          <label htmlFor="first">Email</label>
+          <Label htmlFor="first">Email</Label>
           <Input
             className={errors?.email ? "error" : "no-error"}
             type="text"
             id="email"
             name="email"
           />
-          {errors?.email && <span>{errors.email}</span>}
+          {errors?.email && <Span>{errors.email}</Span>}
 
-          <label htmlFor="password">Password</label>
+          <Label htmlFor="password">Password</Label>
           <Input
             className={errors?.password ? "error" : "no-error"}
             type="password"
             id="password"
             name="password"
           />
-          {errors?.password && <span>{errors.password}</span>}
+          {errors?.password && <Span>{errors.password}</Span>}
           <ButtonContainer>
             <Button type="submit" className="sign-in-btn">
               Sign In
@@ -159,6 +171,11 @@ export async function action({ request }) {
       errors.password = resData?.errors?.password;
       toast.error("Login failed, please try again.", {
         duration: 1500,
+        style: {
+          minWidth: "250px",
+          height: "4rem",
+          fontSize: "1.4rem",
+        },
       });
 
       return errors;
@@ -182,11 +199,25 @@ export async function action({ request }) {
   // errors = resData.errors;
 
   if (Object.keys(errors).length > 0) {
-    toast.error("Login failed, please try again.");
+    toast.error("Login failed, please try again.", {
+      duration: 1500,
+      style: {
+        minWidth: "250px",
+        height: "4rem",
+        fontSize: "1.4rem",
+      },
+    });
     console.log(errors);
     return errors;
   }
-  toast.success("User has been authenticated.");
+  toast.success("User has been authenticated.", {
+    duration: 1500,
+    style: {
+      minWidth: "250px",
+      height: "4rem",
+      fontSize: "1.4rem",
+    },
+  });
 
   return redirect("/");
 }

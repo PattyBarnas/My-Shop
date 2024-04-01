@@ -9,23 +9,66 @@ const StyledForm = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  background-color: #f8f9fa;
+  width: 30%;
+  padding: 2.6rem 0;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const StyledInput = styled.input`
-  width: 18%;
-  padding: 0.6rem;
-  border-radius: 6px;
-  border: 1px solid black;
-  margin-bottom: 1.2rem;
+  border-radius: 3px;
+  border: 2px solid #999;
+  padding: 0.8rem 1rem;
+  width: 40%;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
 `;
 
 const StyledLabel = styled.label`
-  font-size: 1.6rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+  /* margin-bottom: 1rem; */
 `;
 
 const H2 = styled.h2`
   font-size: 2.9rem;
+  font-weight: 400;
+`;
+const P = styled.p`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
+const A = styled.a`
+  color: #1971c2;
+  font-size: 1.4rem;
+  cursor: pointer;
   font-weight: 500;
+  margin-bottom: 1.2rem;
+`;
+
+const CreateButton = styled.button`
+  padding: 1rem 4.4rem;
+  border-radius: 15px;
+  background-color: #228be6;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+`;
+
+const Span = styled.span`
+  font-size: 1.4rem;
+  letter-spacing: 0.8px;
+  color: red;
 `;
 
 export default function SignUpForm(props) {
@@ -37,29 +80,49 @@ export default function SignUpForm(props) {
     <Form method="POST" action="/account/signup">
       <StyledForm>
         <H2>Create an account</H2>
-        <p>
+        <P>
           <StyledLabel htmlFor="firstName">First Name</StyledLabel>
-          <StyledInput type="text" id="firstName" name="firstName" />
-          {errors?.firstName && <span>{errors.firstName}</span>}
-        </p>
-        <p>
+          <StyledInput
+            className={`${errors?.firstName ? "error" : "no-error"}`}
+            type="text"
+            id="firstName"
+            name="firstName"
+          />
+          {errors?.firstName && <Span>{errors.firstName}</Span>}
+        </P>
+        <P>
           <StyledLabel htmlFor="first">Last Name</StyledLabel>
-          <StyledInput type="text" id="lastName" name="lastName" />
-          {errors?.lastName && <span>{errors.lastName}</span>}
-        </p>
-        <p>
+          <StyledInput
+            className={`${errors?.lastName ? "error" : "no-error"}`}
+            type="text"
+            id="lastName"
+            name="lastName"
+          />
+          {errors?.lastName && <Span>{errors.lastName}</Span>}
+        </P>
+        <P>
           <StyledLabel htmlFor="first">Email</StyledLabel>
-          <StyledInput type="text" id="email" name="email" />
-          {errors?.email && <span>{errors.email}</span>}
-        </p>
-        <p>
+          <StyledInput
+            className={`${errors?.email ? "error" : "no-error"}`}
+            type="text"
+            id="email"
+            name="email"
+          />
+          {errors?.email && <Span>{errors.email}</Span>}
+        </P>
+        <P>
           <StyledLabel htmlFor="password">Password</StyledLabel>
-          <StyledInput type="password" id="password" name="password" />
-          {errors?.password && <span>{errors.password}</span>}
-        </p>
-        <a>Forgot your password ?</a>
+          <StyledInput
+            className={`${errors?.password ? "error" : "no-error"}`}
+            type="password"
+            id="password"
+            name="password"
+          />
+          {errors?.password && <Span>{errors.password}</Span>}
+        </P>
+        <A>Forgot your password ?</A>
         <div>
-          <button type="submit">Create</button>
+          <CreateButton type="submit">Create</CreateButton>
         </div>
       </StyledForm>
     </Form>
@@ -130,10 +193,24 @@ export async function action({ request }) {
   } catch (error) {}
 
   if (Object.keys(errors).length > 0) {
-    toast.error("Signing up failed, please try again.");
+    toast.error("Signing up failed, please try again.", {
+      duration: 1500,
+      style: {
+        minWidth: "250px",
+        height: "4rem",
+        fontSize: "1.4rem",
+      },
+    });
     return errors;
   }
-  toast.success("Sign up has completed, welcome!");
+  toast.success("Sign up has completed, welcome!", {
+    duration: 1500,
+    style: {
+      minWidth: "250px",
+      height: "4rem",
+      fontSize: "1.4rem",
+    },
+  });
 
   return redirect("/");
 }
