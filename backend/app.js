@@ -4,6 +4,7 @@ const app = express();
 
 const productRoutes = require("./routes/product");
 const accountRoutes = require("./routes/account");
+const paymentRoutes = require("./routes/payment");
 const mongoose = require("mongoose");
 
 const uri = "mongodb+srv://pbarnas:store123@my-store.lzs7qfq.mongodb.net/shop";
@@ -19,6 +20,8 @@ app.use((req, res, next) => {
 app.use("/products", productRoutes);
 
 app.use("/account", accountRoutes);
+
+app.use("/payment", paymentRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.status || 500;
