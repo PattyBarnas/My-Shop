@@ -37,7 +37,7 @@ const Description = styled.div`
 const Image = styled.img`
   display: block;
   margin-left: auto;
-  width: 65%;
+  width: 60rem;
   height: 100%;
   border-radius: 12px;
   box-shadow: 4px 16px 24px rgba(0, 0, 0, 0.1);
@@ -105,7 +105,7 @@ const ProductItem = ({ product }) => {
     <StyledProductItem>
       <StyledProductContainer>
         <div>
-          <Image src={tShirtImg} alt="T-shirt Image"></Image>
+          <Image src={product.image} alt="T-shirt Image"></Image>
         </div>
 
         <Description>

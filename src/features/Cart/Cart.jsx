@@ -106,6 +106,7 @@ function Cart({ children }) {
                 quantity={item.qty}
                 color={item.product.color}
                 price={item.product.price}
+                image={item.product.image}
               />
             </ul>
           );

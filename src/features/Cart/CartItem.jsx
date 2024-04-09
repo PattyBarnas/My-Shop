@@ -91,7 +91,7 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
     <>
       <StyledCartItem key={id}>
         <div>
-          <Image src={img} alt="T-shirt Image" />
+          <Image src={image} alt="T-shirt Image" />
         </div>
         <DescriptionDiv>
           <Title>{title}</Title>

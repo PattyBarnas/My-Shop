@@ -15,7 +15,7 @@ const StyledUL = styled.ul`
   height: 100%;
   width: 95%;
   text-decoration: none;
-  gap: 1.8rem;
+  gap: 3.2rem;
   margin-bottom: 5.4rem;
 `;
 
@@ -23,12 +23,11 @@ const StyledLi = styled.li`
   display: flex;
   border-radius: 12px;
   box-shadow: 2px 12px 18px rgba(0, 0, 0, 0.05);
-
   overflow: hidden;
 `;
 const Image = styled.img`
   width: 45rem;
-  height: 100%;
+  height: 45rem;
 `;
 const StyledProductItem = styled.li`
   display: flex;
@@ -73,7 +72,7 @@ const ProductList = ({ products }) => {
               to={`/products/${prod.id}`}
             >
               <div>
-                <Image src={tShirtImg} alt={prod.image} />
+                <Image src={prod.image} alt={prod.image} />
               </div>
               <Description>
                 <p>{prod.description}</p>
