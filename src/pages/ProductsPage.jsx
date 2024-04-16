@@ -3,15 +3,19 @@ import NavBar from "../ui/NavBar";
 import { useCart } from "../store/CartContext";
 import ProductList from "../features/Products/ProductList";
 import { useLoaderData, json, defer, Await } from "react-router-dom";
+import LandingPage from "../features/LandingPage/LandingPage";
 
 function ProductsPage() {
   const { products } = useLoaderData();
   return (
-    <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
-      <Await resolve={products}>
-        {(loadedProducts) => <ProductList products={loadedProducts} />}
-      </Await>
-    </Suspense>
+    <>
+      <LandingPage />
+      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
+        <Await resolve={products}>
+          {(loadedProducts) => <ProductList products={loadedProducts} />}
+        </Await>
+      </Suspense>
+    </>
   );
 }
 

@@ -11,7 +11,7 @@ import { useCart } from "../store/CartContext";
 const StyledNav = styled.nav`
   position: relative;
   padding: 1.8rem;
-  margin-bottom: 4.4rem;
+ 
 `;
 
 const ButtonSpan = styled.p`

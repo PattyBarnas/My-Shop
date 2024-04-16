@@ -11,7 +11,7 @@ const StyledProductItem = styled.li`
   height: 100%;
   list-style: none;
   gap: 1.6rem;
-  margin: 0 auto;
+  margin: 6.2rem auto 0;
 `;
 const Title = styled.p`
   margin: 0;
