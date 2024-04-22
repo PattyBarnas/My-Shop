@@ -62,7 +62,7 @@ const StyledH3 = styled.h3`
 
 const ProductList = ({ products }) => {
   return (
-    <div>
+    <div id="products">
       <StyledH3>Products.</StyledH3>
       <StyledUL>
         {products.map((prod) => (
