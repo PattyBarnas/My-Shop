@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import LandingPageImg from "../../data/Images/landing-page-3.jpg";
+import LandingPageImg from "../../data/Images/landing-page.jpg";
 
 const StyledHeader = styled.header`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +25,7 @@ const H1 = styled.h1`
   font-size: 3.8rem;
   font-weight: 500;
   width: 75%;
-  color: #222;
+  color: #212529;
   letter-spacing: 0.8px;
   line-height: 1.3;
   text-align: center;
@@ -34,7 +35,7 @@ const Image = styled.img`
   height: 100%;
   width: 65%;
   transform: rotate(5deg);
-  border-radius: 10px;
+  border-radius: 5px;
   margin-left: 3.8rem;
 `;
 const Div = styled.div`
@@ -48,19 +49,31 @@ const Text = styled.p`
   letter-spacing: 0.8px;
   width: 75%;
   margin-bottom: 4.4rem;
+  color: #343a40;
 `;
 
 const A = styled.a`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
   letter-spacing: 0.9px;
   font-weight: 500;
   font-size: 1.6rem;
-  gap: 2px;
+  /* gap: 2px; */
+  margin-bottom: 1rem;
   text-decoration: none;
   color: #222;
   cursor: pointer;
+`;
+const Div2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10%;
+  /* left: 45%; */
 `;
 
 function LandingPage(props) {
@@ -72,14 +85,18 @@ function LandingPage(props) {
           - From cozy fabrics we redefine fashion, every outfit blends comfort
           seamlessly with sophistication.
         </Text>
-        <A href="#products">
-          Learn More
-          <ion-icon size="large" name="arrow-down-sharp"></ion-icon>
-        </A>
       </Div>
       <Container>
         <Image src={LandingPageImg} alt="Cover image of fashion" />
       </Container>
+      <Div2>
+        <A href="#products">Learn More</A>
+        <ion-icon
+          id="ion-arrow-down"
+          size="large"
+          name="arrow-down-sharp"
+        ></ion-icon>
+      </Div2>
     </StyledHeader>
   );
 }

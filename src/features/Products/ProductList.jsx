@@ -22,7 +22,7 @@ const StyledUL = styled.ul`
 const StyledLi = styled.li`
   display: flex;
   border-radius: 12px;
-  box-shadow: 2px 12px 18px rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 16px 24px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 `;
 const Image = styled.img`
@@ -60,9 +60,13 @@ const StyledH3 = styled.h3`
   margin: 2.2rem auto;
 `;
 
+const Div = styled.div`
+  /* background-color: #fff4e6; */
+`;
+
 const ProductList = ({ products }) => {
   return (
-    <div id="products">
+    <Div id="products">
       <StyledH3>Products.</StyledH3>
       <StyledUL>
         {products.map((prod) => (
@@ -82,7 +86,7 @@ const ProductList = ({ products }) => {
           </StyledLi>
         ))}
       </StyledUL>
-    </div>
+    </Div>
   );
 };
 
