@@ -79,28 +79,26 @@ const StyledSizeButton = styled.button`
   cursor: pointer;
   margin-bottom: 2.2rem;
 `;
+const { cart, onAddItem, onCartOpen, size, setSize } = useCart();
 
-const ProductItem = ({ product }) => {
-  const { cart, onAddItem, onCartOpen, size, setSize } = useCart();
+function handleSetSize(e) {
+  const userInput = e.target.id;
+  const userSizeSelected = e.target.value;
 
-  function handleSetSize(e) {
-    const userInput = e.target.id;
-    const userSizeSelected = e.target.value;
-
-    if (userInput === "1") {
-      setSize(userSizeSelected);
-    }
-    if (userInput === "2") {
-      setSize(userSizeSelected);
-    }
-    if (userInput === "3") {
-      setSize(userSizeSelected);
-    }
-    if (userInput === "4") {
-      setSize(userSizeSelected);
-    }
+  if (userInput === "1") {
+    setSize(userSizeSelected);
   }
-
+  if (userInput === "2") {
+    setSize(userSizeSelected);
+  }
+  if (userInput === "3") {
+    setSize(userSizeSelected);
+  }
+  if (userInput === "4") {
+    setSize(userSizeSelected);
+  }
+}
+const ProductItem = ({ product }) => {
   return (
     <StyledProductItem>
       <StyledProductContainer>
