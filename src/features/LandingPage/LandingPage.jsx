@@ -35,6 +35,7 @@ const Image = styled.img`
   height: 100%;
   width: 65%;
   transform: rotate(5deg);
+  box-shadow: 2px 16px 24px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin-left: 3.8rem;
 `;
@@ -53,27 +54,21 @@ const Text = styled.p`
 `;
 
 const A = styled.a`
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   letter-spacing: 0.9px;
   font-weight: 500;
   font-size: 1.6rem;
-  /* gap: 2px; */
-  margin-bottom: 1rem;
+  gap: 2px;
   text-decoration: none;
   color: #222;
   cursor: pointer;
 `;
 const Div2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: absolute;
   bottom: 10%;
-  /* left: 45%; */
 `;
 
 function LandingPage(props) {
@@ -90,12 +85,14 @@ function LandingPage(props) {
         <Image src={LandingPageImg} alt="Cover image of fashion" />
       </Container>
       <Div2>
-        <A href="#products">Learn More</A>
-        <ion-icon
-          id="ion-arrow-down"
-          size="large"
-          name="arrow-down-sharp"
-        ></ion-icon>
+        <A href="#products">
+          Learn More{" "}
+          <ion-icon
+            id="ion-arrow-down"
+            size="large"
+            name="arrow-down-sharp"
+          ></ion-icon>
+        </A>
       </Div2>
     </StyledHeader>
   );

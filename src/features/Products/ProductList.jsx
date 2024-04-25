@@ -63,6 +63,11 @@ const StyledH3 = styled.h3`
 const Div = styled.div`
   /* background-color: #fff4e6; */
 `;
+const P = styled.p`
+  font-size: 1.5rem;
+  letter-spacing: 1.2px;
+  color: #495057;
+`;
 
 const ProductList = ({ products }) => {
   return (
@@ -79,7 +84,7 @@ const ProductList = ({ products }) => {
                 <Image src={prod.image} alt={prod.image} />
               </div>
               <Description>
-                <p>{prod.description}</p>
+                <P>{prod.description}</P>
                 <Price>{prod.price}</Price>
               </Description>
             </Link>

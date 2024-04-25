@@ -34,8 +34,12 @@ const Checkout = () => {
 
   // Render the form using the clientSecret
 
+  const appearance = {
+    theme: "stripe",
+  };
   const options = {
     clientSecret: `${clientSecret}`,
+    appearance,
   };
 
   return (
