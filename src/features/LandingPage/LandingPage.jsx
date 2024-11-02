@@ -22,19 +22,19 @@ const Container = styled.div`
   width: 50%;
 `;
 const H1 = styled.h1`
-  font-family: cursive;
-  font-size: 3.8rem;
+  font-family: "Satisfy", cursive;
   font-weight: 500;
+  font-style: normal;
+  font-size: 5.6rem;
   width: 75%;
   color: #212529;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.9px;
   line-height: 1.3;
   text-align: center;
-  margin-bottom: 5.8rem;
+  margin-bottom: 3.8rem;
 `;
 const Image = styled.img`
-  height: 100%;
-  width: 65%;
+  width: 60%;
   transform: rotate(5deg);
   box-shadow: 2px 16px 24px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -44,14 +44,16 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 50%;
 `;
 
 const Text = styled.p`
-  font-size: 1.7rem;
-  letter-spacing: 0.8px;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.9px;
   width: 75%;
   margin-bottom: 4.4rem;
-  color: #343a40;
+  color: #212529;
 `;
 
 const A = styled.a`
@@ -69,7 +71,7 @@ const A = styled.a`
 `;
 const Div2 = styled.div`
   position: absolute;
-  bottom: 10%;
+  bottom: 7%;
 `;
 
 function LandingPage(props) {
@@ -78,8 +80,10 @@ function LandingPage(props) {
       <Div>
         <H1>Elevating Comfort to a Stylish Standard</H1>
         <Text>
-          From cozy fabrics we redefine fashion, every outfit blends comfort
-          seamlessly with sophistication.
+          From cozy fabrics, we redefine fashion. Each outfit blends comfort
+          seamlessly with sophistication. Inspired by timeless elegance and
+          crafted with care, our collection brings you pieces that don’t just
+          fit – they embrace.
         </Text>
       </Div>
       <Container>
@@ -87,7 +91,7 @@ function LandingPage(props) {
       </Container>
       <Div2>
         <A href="#products">
-          Learn More{" "}
+          Learn More
           <ion-icon
             id="ion-arrow-down"
             size="large"

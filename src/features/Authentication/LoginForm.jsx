@@ -7,6 +7,18 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { clear } from "localforage";
 
+const FormContainer = styled.div`
+  display: block;
+  background-color: #f8f9fa;
+  width: 30%;
+  height: 100%
+  padding: 2.6rem 0;
+  margin: 0 auto;
+  margin-top: 6%;
+  border-radius: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+`;
+
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,14 +59,6 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-`;
-const FormContainer = styled.div`
-  background-color: #f8f9fa;
-  width: 30%;
-  padding: 2.6rem 0;
-  margin: 0 auto;
-  border-radius: 10px;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const Input = styled.input`
