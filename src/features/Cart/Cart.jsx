@@ -29,7 +29,7 @@ const StyledCart = styled.div`
   height: 100%;
   text-align: center;
   animation: ${slideIn} 0.2s;
-  z-index: 1;
+  z-index: 2;
   overflow: scroll;
 `;
 const StyledCartHeader = styled.h1`

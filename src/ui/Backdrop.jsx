@@ -8,6 +8,7 @@ const BackdropStyled = styled.div`
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
 `;
 
 function Backdrop(props) {
