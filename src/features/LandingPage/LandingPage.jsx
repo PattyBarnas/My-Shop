@@ -81,9 +81,7 @@ function LandingPage(props) {
         <H1>Elevating Comfort to a Stylish Standard</H1>
         <Text>
           From cozy fabrics, we redefine fashion. Each outfit blends comfort
-          seamlessly with sophistication. Inspired by timeless elegance and
-          crafted with care, our collection brings you pieces that don’t just
-          fit – they embrace.
+          seamlessly with sophistication.
         </Text>
       </Div>
       <Container>

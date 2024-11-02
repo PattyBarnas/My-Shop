@@ -22,13 +22,16 @@ const StyledLi = styled.li`
   overflow: hidden;
 `;
 const Image = styled.img`
-  width: 45rem;
+  overflow: hidden;
+  width: 100%;
   height: 45rem;
 `;
 const ImageContainer = styled.div`
-  transition: transform 0.4s ease-in-out;
+  width: 45rem;
+  max-height: 45rem;
+  transition: transform 0.6s ease-in-out;
   &:hover {
-    transform: scaleX(1.1);
+    transform: scale(1.1);
   }
 `;
 
@@ -62,6 +65,10 @@ const P = styled.p`
   color: #495057;
 `;
 
+const Overflow = styled.div`
+  overflow: hidden;
+`;
+
 const ProductList = ({ products }) => {
   return (
     <Div id="products">
@@ -69,21 +76,21 @@ const ProductList = ({ products }) => {
       <StyledUL>
         {products.map((prod) => (
           <StyledLi key={prod.id} id={prod.id}>
-            <>
-              <Link
-                style={{ textDecoration: "none" }}
-                to={`/products/${prod.id}`}
-              >
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/products/${prod.id}`}
+            >
+              <Overflow>
                 <ImageContainer>
                   <Image src={prod.image} alt={prod.image} />
                 </ImageContainer>
+              </Overflow>
 
-                <Description>
-                  <P>{prod.description}</P>
-                  <Price>{prod.price}</Price>
-                </Description>
-              </Link>
-            </>
+              <Description>
+                <P>{prod.description}</P>
+                <Price>{prod.price}</Price>
+              </Description>
+            </Link>
           </StyledLi>
         ))}
       </StyledUL>
