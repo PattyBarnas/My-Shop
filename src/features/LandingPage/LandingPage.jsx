@@ -22,6 +22,7 @@ const Container = styled.div`
   width: 50%;
 `;
 const H1 = styled.h1`
+  font-family: cursive;
   font-size: 3.8rem;
   font-weight: 500;
   width: 75%;
@@ -77,7 +78,7 @@ function LandingPage(props) {
       <Div>
         <H1>Elevating Comfort to a Stylish Standard</H1>
         <Text>
-          - From cozy fabrics we redefine fashion, every outfit blends comfort
+          From cozy fabrics we redefine fashion, every outfit blends comfort
           seamlessly with sophistication.
         </Text>
       </Div>
