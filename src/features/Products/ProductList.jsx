@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ProductItem from "./ProductItem";
-
 import styled from "styled-components";
-import "./ProductList.css";
-import tShirtImg from "../../data/Images/t-shirt.jpg";
 
 const StyledUL = styled.ul`
   display: flex;
@@ -29,16 +25,13 @@ const Image = styled.img`
   width: 45rem;
   height: 45rem;
 `;
-const StyledProductItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 85%;
-  height: 100%;
-  list-style: none;
-  gap: 1.6rem;
+const ImageContainer = styled.div`
+  transition: transform 0.4s ease-in-out;
+  &:hover {
+    transform: scaleX(1.1);
+  }
 `;
+
 const Price = styled.p`
   font-size: 2rem;
   color: green;
@@ -54,10 +47,10 @@ const Description = styled.div`
 
 const StyledH3 = styled.h3`
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 500;
   /* width: 73.5%; */
-  margin: 2.2rem auto;
+  margin: 4.6rem auto;
 `;
 
 const Div = styled.div`
@@ -76,18 +69,21 @@ const ProductList = ({ products }) => {
       <StyledUL>
         {products.map((prod) => (
           <StyledLi key={prod.id} id={prod.id}>
-            <Link
-              style={{ textDecoration: "none" }}
-              to={`/products/${prod.id}`}
-            >
-              <div>
-                <Image src={prod.image} alt={prod.image} />
-              </div>
-              <Description>
-                <P>{prod.description}</P>
-                <Price>{prod.price}</Price>
-              </Description>
-            </Link>
+            <>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/products/${prod.id}`}
+              >
+                <ImageContainer>
+                  <Image src={prod.image} alt={prod.image} />
+                </ImageContainer>
+
+                <Description>
+                  <P>{prod.description}</P>
+                  <Price>{prod.price}</Price>
+                </Description>
+              </Link>
+            </>
           </StyledLi>
         ))}
       </StyledUL>

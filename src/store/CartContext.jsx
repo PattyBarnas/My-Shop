@@ -16,7 +16,6 @@ function CartProvider({ children }) {
       (i) => i.product._id === item._id
     );
     const existingItem = updatedCart[existingItemIndex];
-
     if (existingItem) {
       return (updatedCart[existingItemIndex] = {
         ...existingItem,
@@ -24,7 +23,6 @@ function CartProvider({ children }) {
         size: (existingItem.size = size),
         price: +existingItem.product.price * existingItem.qty,
       });
-      setCart(updatedCart);
     } else {
       setCart((items) => [
         ...items,

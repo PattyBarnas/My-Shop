@@ -2,8 +2,7 @@ import styled, { keyframes } from "styled-components";
 import CartItem from "../Cart/CartItem";
 import { useCart } from "../../store/CartContext";
 import { useNavigate } from "react-router-dom";
-
-const slideIn = keyframes`
+let slideIn = keyframes`
 0%{
   width: 0%;
 }
@@ -11,7 +10,8 @@ const slideIn = keyframes`
 100%{
   width: 30%;
 }`;
-const slideOut = keyframes`
+
+let slideOut = keyframes`
 0%{
   width: 30%;
 }
@@ -28,7 +28,7 @@ const StyledCart = styled.div`
   width: 27.5%;
   height: 100%;
   text-align: center;
-  animation: ${slideIn} 0.2s;
+  animation: ${slideIn} 0.4s;
   z-index: 2;
   overflow: scroll;
 `;
@@ -75,10 +75,11 @@ const StyledCheckOutBtn = styled.button`
   cursor: pointer;
 `;
 
-function Cart({ children }) {
-  const { cart, onCartOpen } = useCart();
-  const navigate = useNavigate();
+var animation;
 
+function Cart({ children }) {
+  const navigate = useNavigate();
+  const { cart, onCartOpen, isOpen } = useCart();
   let totalAmount = cart.reduce((acc, item) => {
     return (acc += item.price * item.qty);
   }, 0);
@@ -88,7 +89,7 @@ function Cart({ children }) {
   }, 0);
 
   const totalItemsText = totalItemQty === 1 ? "item" : "items";
-  console.log(cart, "cart");
+
   return (
     <StyledCart>
       <StyledCartHeader>YOUR CART</StyledCartHeader>
