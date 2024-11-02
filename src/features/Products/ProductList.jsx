@@ -37,7 +37,7 @@ const ImageContainer = styled.div`
 
 const Price = styled.p`
   font-size: 2rem;
-  color: green;
+  color: #0b7285;
   font-weight: 500;
   text-decoration: none;
 `;
@@ -56,9 +56,6 @@ const StyledH3 = styled.h3`
   margin: 4.6rem auto;
 `;
 
-const Div = styled.div`
-  /* background-color: #fff4e6; */
-`;
 const P = styled.p`
   font-size: 1.5rem;
   letter-spacing: 1.2px;
@@ -71,7 +68,7 @@ const Overflow = styled.div`
 
 const ProductList = ({ products }) => {
   return (
-    <Div id="products">
+    <>
       <StyledH3>Products.</StyledH3>
       <StyledUL>
         {products.map((prod) => (
@@ -88,13 +85,13 @@ const ProductList = ({ products }) => {
 
               <Description>
                 <P>{prod.description}</P>
-                <Price>{prod.price}</Price>
+                <Price>${prod.price}</Price>
               </Description>
             </Link>
           </StyledLi>
         ))}
       </StyledUL>
-    </Div>
+    </>
   );
 };
 

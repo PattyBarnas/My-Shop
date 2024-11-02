@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 import CartItem from "../Cart/CartItem";
 import { useCart } from "../../store/CartContext";
 import { useNavigate } from "react-router-dom";
+
 let slideIn = keyframes`
 0%{
   width: 0%;
@@ -15,7 +16,6 @@ let slideOut = keyframes`
 0%{
   width: 30%;
 }
-
 100%{
   width: 0%;
 }`;
@@ -28,7 +28,7 @@ const StyledCart = styled.div`
   width: 27.5%;
   height: 100%;
   text-align: center;
-  animation: ${slideIn} 0.4s;
+  animation: ${slideIn} 0.5s;
   z-index: 2;
   overflow: scroll;
 `;
@@ -75,11 +75,9 @@ const StyledCheckOutBtn = styled.button`
   cursor: pointer;
 `;
 
-var animation;
-
-function Cart({ children }) {
+function Cart() {
   const navigate = useNavigate();
-  const { cart, onCartOpen, isOpen } = useCart();
+  const { cart, onCartOpen } = useCart();
   let totalAmount = cart.reduce((acc, item) => {
     return (acc += item.price * item.qty);
   }, 0);
