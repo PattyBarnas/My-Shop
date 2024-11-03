@@ -11,7 +11,7 @@ const StyledProductItem = styled.li`
   height: 100%;
   list-style: none;
   gap: 1.6rem;
-  margin: 6.2rem auto 0;
+  margin: 6.2rem auto 6.2rem;
   padding: 5.2rem;
 `;
 const Title = styled.p`
@@ -81,12 +81,12 @@ const StyledSizeButton = styled.button`
 `;
 
 const BackButton = styled.button`
-  margin: 2.8rem auto;
-  margin-top: auto;
+  text-transform: uppercase;
+  margin: 0 0 8.4rem 0;
   display: block;
   padding: 1.2rem 2.8rem;
   background: transparent;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   cursor: pointer;
   border: none;
   border-bottom: 1px solid black;

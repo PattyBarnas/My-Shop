@@ -40,7 +40,7 @@ const createUser = async (req, res, next) => {
     );
 
     if (Object.keys(errors).length > 0) {
-      return res.json({ message: "Signing up failed.", errors });
+      return res.status(422).json({ message: "Signing up failed.", errors });
     }
 
     try {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useActionData, Form, redirect } from "react-router-dom";
+import { useActionData, Form, redirect, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 
@@ -12,7 +12,7 @@ const StyledForm = styled.div`
   background-color: #f8f9fa;
   width: 30%;
   padding: 2.6rem 0;
-  margin: 0 auto;
+  margin: 6.8rem auto;
   border-radius: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 `;
@@ -64,6 +64,20 @@ const CreateButton = styled.button`
   letter-spacing: 1px;
   margin-bottom: 1.6rem;
 `;
+const Button = styled.button`
+  display: block;
+  width: 15rem;
+  padding: 1rem 4.4rem;
+  border-radius: 15px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  color: #111;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+`;
 
 const Span = styled.span`
   font-size: 1.4rem;
@@ -72,6 +86,7 @@ const Span = styled.span`
 `;
 
 export default function SignUpForm(props) {
+  const navigate = useNavigate();
   const errors = useActionData();
   // SIGN UP FORM VALIDATION NEEDS TO BE FIXED
   //  -inputs think everything is a string even when numbers are typed
@@ -124,6 +139,9 @@ export default function SignUpForm(props) {
         <div>
           <CreateButton type="submit">Create</CreateButton>
         </div>
+        <Button type="button" onClick={() => navigate(-1)}>
+          Back to login
+        </Button>
       </StyledForm>
     </Form>
   );
