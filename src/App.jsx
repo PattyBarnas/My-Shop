@@ -4,7 +4,6 @@ import Backdrop from "./ui/Backdrop";
 import NavBar from "./ui/NavBar";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage, { loader as ProductLoader } from "./pages/HomePage";
-
 import ProductPage from "./pages/ProductsPage";
 
 import { CartProvider } from "./store/CartContext";
