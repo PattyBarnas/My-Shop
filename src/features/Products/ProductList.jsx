@@ -51,7 +51,7 @@ const Description = styled.div`
 const StyledH3 = styled.h3`
   text-align: center;
   font-size: 3rem;
-  font-weight: 500;
+  font-weight: 400;
   /* width: 73.5%; */
   margin: 4.6rem auto;
 `;
@@ -68,8 +68,8 @@ const Overflow = styled.div`
 
 const ProductList = ({ products }) => {
   return (
-    <>
-      <StyledH3>Products.</StyledH3>
+    <div id="products">
+      <StyledH3>Shop.</StyledH3>
       <StyledUL>
         {products.map((prod) => (
           <StyledLi key={prod.id} id={prod.id}>
@@ -91,7 +91,7 @@ const ProductList = ({ products }) => {
           </StyledLi>
         ))}
       </StyledUL>
-    </>
+    </div>
   );
 };
 

@@ -8,8 +8,6 @@ import Backdrop from "./Backdrop";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../store/CartContext";
 
-import { Transition } from "react-transition-group";
-
 const StyledNav = styled.nav`
   position: relative;
   padding: 1.8rem;
@@ -77,8 +75,6 @@ function NavBar(props) {
   const navigate = useNavigate();
   const { onCartOpen, isOpen } = useCart();
 
-  // console.log(useCart());
-
   return (
     <StyledNav>
       <LogoDiv>
@@ -103,20 +99,9 @@ function NavBar(props) {
           </Button>
         </StyledList>
       </UL>
-      <Transition in={isOpen} timeout={250}>
-        {(state) => (
-          <>
-            {isOpen && <Cart duration={250} state={state} />}
-            {isOpen && (
-              <Backdrop
-                onClick={() => onCartOpen()}
-                duration={250}
-                state={state}
-              />
-            )}
-          </>
-        )}
-      </Transition>
+
+      {isOpen && <Cart />}
+      {isOpen && <Backdrop onClick={() => onCartOpen()} />}
     </StyledNav>
   );
 }

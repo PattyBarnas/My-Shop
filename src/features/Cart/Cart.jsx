@@ -19,7 +19,7 @@ let slideOut = keyframes`
 100%{
   width: 0%;
 }`;
-
+// animation: ${(props) => (!props.isOpen ? slideIn : slideOut)} 0.5s;
 const StyledCart = styled.div`
   position: fixed;
   top: 0;
@@ -28,7 +28,7 @@ const StyledCart = styled.div`
   width: 27.5%;
   height: 100%;
   text-align: center;
-  animation: ${slideIn} 0.5s;
+  animation: ${slideIn} 0.4s;
   z-index: 2;
   overflow: scroll;
 `;
