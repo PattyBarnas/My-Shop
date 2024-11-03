@@ -11,7 +11,6 @@ import { useCart } from "../store/CartContext";
 const StyledNav = styled.nav`
   position: relative;
   padding: 1.8rem;
- 
 `;
 
 const ButtonSpan = styled.p`
@@ -76,8 +75,6 @@ function NavBar(props) {
   const navigate = useNavigate();
   const { onCartOpen, isOpen } = useCart();
 
-  // console.log(useCart());
-
   return (
     <StyledNav>
       <LogoDiv>
@@ -102,6 +99,7 @@ function NavBar(props) {
           </Button>
         </StyledList>
       </UL>
+
       {isOpen && <Cart />}
       {isOpen && <Backdrop onClick={() => onCartOpen()} />}
     </StyledNav>

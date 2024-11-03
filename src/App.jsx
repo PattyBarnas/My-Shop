@@ -3,7 +3,8 @@ import Cart from "./features/Cart/Cart";
 import Backdrop from "./ui/Backdrop";
 import NavBar from "./ui/NavBar";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ProductsPage, { loader as ProductLoader } from "./pages/ProductsPage";
+import HomePage, { loader as ProductLoader } from "./pages/HomePage";
+import ProductPage from "./pages/ProductsPage";
 
 import { CartProvider } from "./store/CartContext";
 import LoginPage from "./pages/LoginPage";
@@ -26,11 +27,16 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ProductsPage />,
+        element: <HomePage />,
         loader: ProductLoader,
       },
       {
-        path: "/checkout",
+        path: "products",
+        element: <ProductPage />,
+        loader: ProductLoader,
+      },
+      {
+        path: "checkout",
         element: <Checkout />,
       },
       {

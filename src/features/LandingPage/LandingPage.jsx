@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LandingPageImg from "../../data/Images/landing-page.jpg";
+import Quality from "./Quality";
 
 const StyledHeader = styled.header`
   position: relative;
@@ -9,10 +10,11 @@ const StyledHeader = styled.header`
   justify-content: center;
   height: 80vh;
   width: 99%;
-  background-color: #ffc078;
+  background-color: #929274;
   margin: 0 auto;
   clip-path: ellipse(100% 100% at 30% 0);
   border-radius: 5px;
+  margin-bottom: 6.4rem;
 `;
 const Container = styled.div`
   display: flex;
@@ -25,16 +27,16 @@ const H1 = styled.h1`
   font-family: "Satisfy", cursive;
   font-weight: 500;
   font-style: normal;
-  font-size: 5.6rem;
+  font-size: 5.4rem;
   width: 75%;
-  color: #212529;
+  color: #fff;
   letter-spacing: 0.9px;
   line-height: 1.3;
   text-align: center;
   margin-bottom: 3.8rem;
 `;
 const Image = styled.img`
-  width: 60%;
+  width: 58%;
   transform: rotate(5deg);
   box-shadow: 2px 16px 24px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -48,12 +50,12 @@ const Div = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 400;
   letter-spacing: 0.9px;
   width: 75%;
   margin-bottom: 4.4rem;
-  color: #212529;
+  color: #fff;
 `;
 
 const A = styled.a`
@@ -66,7 +68,7 @@ const A = styled.a`
   font-size: 1.6rem;
   gap: 2px;
   text-decoration: none;
-  color: #222;
+  color: #fff;
   cursor: pointer;
 `;
 const Div2 = styled.div`
@@ -76,30 +78,31 @@ const Div2 = styled.div`
 
 function LandingPage(props) {
   return (
-    <StyledHeader>
-      <Div>
-        <H1>Elevating Comfort to a Stylish Standard</H1>
-        <Text>
-          From cozy fabrics, we redefine fashion. Each outfit blends comfort
-          seamlessly with sophistication. Inspired by timeless elegance and
-          crafted with care, our collection brings you pieces that don’t just
-          fit – they embrace.
-        </Text>
-      </Div>
-      <Container>
-        <Image src={LandingPageImg} alt="Cover image of fashion" />
-      </Container>
-      <Div2>
-        <A href="#products">
-          Learn More
-          <ion-icon
-            id="ion-arrow-down"
-            size="large"
-            name="arrow-down-sharp"
-          ></ion-icon>
-        </A>
-      </Div2>
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <Div>
+          <H1>Elevating Comfort to a Stylish Standard</H1>
+          <Text>
+            From cozy fabrics, we redefine fashion. Each outfit blends comfort
+            seamlessly with sophistication.
+          </Text>
+        </Div>
+        <Container>
+          <Image src={LandingPageImg} alt="Cover image of fashion" />
+        </Container>
+        <Div2>
+          <A href="#quality">
+            Learn More
+            <ion-icon
+              id="ion-arrow-down"
+              size="large"
+              name="arrow-down-sharp"
+            ></ion-icon>
+          </A>
+        </Div2>
+      </StyledHeader>
+      <Quality />
+    </>
   );
 }
 

@@ -20,7 +20,7 @@ const Title = styled.p`
 `;
 const Price = styled.p`
   font-size: 2rem;
-  color: green;
+  color: #0b7285;
   font-weight: 500;
   text-decoration: none;
 `;
