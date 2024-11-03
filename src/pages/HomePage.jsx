@@ -7,20 +7,22 @@ import LandingPage from "../features/LandingPage/LandingPage";
 import Everything from "../features/LandingPage/Everything";
 import Quality from "../features/LandingPage/Quality";
 
-function ProductsPage() {
+function HomePage() {
   const { products } = useLoaderData();
   return (
     <>
+      <LandingPage />
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
         <Await resolve={products}>
           {(loadedProducts) => <ProductList products={loadedProducts} />}
         </Await>
       </Suspense>
+      <Everything />
     </>
   );
 }
 
-export default ProductsPage;
+export default HomePage;
 
 async function loadEvents() {
   const response = await fetch("http://localhost:8080/products");

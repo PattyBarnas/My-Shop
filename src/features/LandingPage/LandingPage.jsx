@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LandingPageImg from "../../data/Images/landing-page.jpg";
+import Quality from "./Quality";
 
 const StyledHeader = styled.header`
   position: relative;
@@ -26,7 +27,7 @@ const H1 = styled.h1`
   font-family: "Satisfy", cursive;
   font-weight: 500;
   font-style: normal;
-  font-size: 5.8rem;
+  font-size: 5.4rem;
   width: 75%;
   color: #fff;
   letter-spacing: 0.9px;
@@ -77,28 +78,31 @@ const Div2 = styled.div`
 
 function LandingPage(props) {
   return (
-    <StyledHeader>
-      <Div>
-        <H1>Elevating Comfort to a Stylish Standard</H1>
-        <Text>
-          From cozy fabrics, we redefine fashion. Each outfit blends comfort
-          seamlessly with sophistication.
-        </Text>
-      </Div>
-      <Container>
-        <Image src={LandingPageImg} alt="Cover image of fashion" />
-      </Container>
-      <Div2>
-        <A href="#products">
-          Learn More
-          <ion-icon
-            id="ion-arrow-down"
-            size="large"
-            name="arrow-down-sharp"
-          ></ion-icon>
-        </A>
-      </Div2>
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <Div>
+          <H1>Elevating Comfort to a Stylish Standard</H1>
+          <Text>
+            From cozy fabrics, we redefine fashion. Each outfit blends comfort
+            seamlessly with sophistication.
+          </Text>
+        </Div>
+        <Container>
+          <Image src={LandingPageImg} alt="Cover image of fashion" />
+        </Container>
+        <Div2>
+          <A href="#quality">
+            Learn More
+            <ion-icon
+              id="ion-arrow-down"
+              size="large"
+              name="arrow-down-sharp"
+            ></ion-icon>
+          </A>
+        </Div2>
+      </StyledHeader>
+      <Quality />
+    </>
   );
 }
 

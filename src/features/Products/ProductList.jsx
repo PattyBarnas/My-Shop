@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import styled from "styled-components";
+
+const Div = styled.div`
+  background-color: #f9f9f9;
+  padding: 2.2rem;
+`;
 
 const StyledUL = styled.ul`
   display: flex;
@@ -18,7 +22,7 @@ const StyledUL = styled.ul`
 const StyledLi = styled.li`
   display: flex;
   border-radius: 12px;
-  box-shadow: 2px 16px 24px rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 16px 24px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 `;
 const Image = styled.img`
@@ -46,6 +50,7 @@ const Description = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
 `;
 
 const StyledH3 = styled.h3`
@@ -54,6 +59,7 @@ const StyledH3 = styled.h3`
   font-weight: 400;
   /* width: 73.5%; */
   margin: 4.6rem auto;
+  text-decoration: overline;
 `;
 
 const P = styled.p`
@@ -68,7 +74,7 @@ const Overflow = styled.div`
 
 const ProductList = ({ products }) => {
   return (
-    <div id="products">
+    <Div id="products">
       <StyledH3>Shop.</StyledH3>
       <StyledUL>
         {products.map((prod) => (
@@ -91,7 +97,7 @@ const ProductList = ({ products }) => {
           </StyledLi>
         ))}
       </StyledUL>
-    </div>
+    </Div>
   );
 };
 
