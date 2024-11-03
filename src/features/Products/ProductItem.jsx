@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Button from "../../ui/Button";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import tShirtImg from "../../data/Images/t-shirt.jpg";
 import { useCart } from "../../store/CartContext";
 import ProductAccordian from "./ProductAccordian";
@@ -12,6 +12,7 @@ const StyledProductItem = styled.li`
   list-style: none;
   gap: 1.6rem;
   margin: 6.2rem auto 0;
+  padding: 5.2rem;
 `;
 const Title = styled.p`
   margin: 0;
@@ -25,7 +26,6 @@ const Price = styled.p`
   text-decoration: none;
 `;
 
-const Span = styled.span``;
 const Description = styled.div`
   display: flex;
   flex-direction: column;
@@ -80,8 +80,26 @@ const StyledSizeButton = styled.button`
   margin-bottom: 2.2rem;
 `;
 
+const BackButton = styled.button`
+  margin: 2.8rem auto;
+  margin-top: auto;
+  display: block;
+  padding: 1.2rem 2.8rem;
+  background: transparent;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border: none;
+  border-bottom: 1px solid black;
+  transition: 0.7s;
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+`;
+
 const ProductItem = ({ product }) => {
   const { cart, onAddItem, onCartOpen, size, setSize } = useCart();
+  const navigate = useNavigate();
 
   function handleSetSize(e) {
     const userInput = e.target.id;
@@ -109,6 +127,9 @@ const ProductItem = ({ product }) => {
         </div>
 
         <Description>
+          <BackButton onClick={() => navigate("/products")}>
+            👈 Back To Shop
+          </BackButton>
           <Title>{product.title}</Title>
           <Price>${product.price}</Price>
           <p

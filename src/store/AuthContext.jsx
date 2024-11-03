@@ -7,6 +7,9 @@ function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
 
   function handleLogin(token) {
+    const storedToken = localStorage.getItem("token");
+    const expiration = localStorage.getItem("expiration");
+
     setToken(token);
   }
   function handleLogout() {
