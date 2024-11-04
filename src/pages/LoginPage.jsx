@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { redirect, json } from "react-router-dom";
 
 function LoginPage(props) {
-  console.log(localStorage.getItem("expiration"));
   return <LoginForm />;
 }
 
@@ -45,10 +44,6 @@ export async function action({ request }) {
     return json(errors, { status: 400 });
   }
 
-  if (Object.keys(errors).length > 0) {
-    return json(errors, { status: 400 });
-  }
-
   try {
     const response = await fetch("http://localhost:8080/account/login", {
       method: "POST",
@@ -67,18 +62,15 @@ export async function action({ request }) {
     }
     const resData = await response.json();
 
-    // const token = resData.token;
+    const token = resData.token;
 
-    // localStorage.setItem("token", token);
+    localStorage.setItem("token", token);
 
-    // const expiration = new Date();
+    const expiration = new Date();
 
-    // expiration.setHours(expiration.getHours() + 1);
+    expiration.setHours(expiration.getHours() + 1);
 
-    // localStorage.setItem("expiration", expiration.toISOString());
-
-    // ADD EXPIRATION DATA function
-    // const expiration = new Date().getHours();
+    localStorage.setItem("expiration", expiration.toISOString());
   } catch (error) {}
   toast.success("User has been authenticated.", {
     duration: 1500,

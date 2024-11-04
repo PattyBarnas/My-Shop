@@ -65,7 +65,6 @@ const CreateButton = styled.button`
   margin-bottom: 1.6rem;
 `;
 const Button = styled.button`
-  display: block;
   width: 15rem;
   padding: 1rem 4.4rem;
   border-radius: 15px;
@@ -73,7 +72,8 @@ const Button = styled.button`
   border: 2px solid rgba(0, 0, 0, 0.6);
   color: #111;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 1.6rem;
   cursor: pointer;
   letter-spacing: 1px;
   margin-bottom: 1.6rem;
@@ -123,7 +123,7 @@ export default function SignUpForm(props) {
             id="email"
             name="email"
           />
-          {errors?.email && <Span>{errors.email}</Span>}
+          {errors && errors?.email && <Span>{errors.email}</Span>}
         </P>
         <P>
           <StyledLabel htmlFor="password">Password</StyledLabel>
@@ -145,90 +145,4 @@ export default function SignUpForm(props) {
       </StyledForm>
     </Form>
   );
-}
-
-export async function action({ request }) {
-  const formData = await request.formData();
-  const firstName = formData.get("firstName");
-  const lastName = formData.get("lastName");
-  const email = formData.get("email");
-  const password = formData.get("password");
-
-  let errors = {};
-
-  const userData = {
-    firstName,
-    lastName,
-    email,
-    password,
-  };
-
-  if (typeof firstName !== "string" || firstName.length <= 0) {
-    errors.firstName = "must not be empty or a number.";
-  }
-  if (typeof lastName !== "string" || lastName.length <= 0) {
-    errors.lastName = "must not be empty or a number.";
-  }
-  if (typeof email !== "string" || !email.includes("@")) {
-    errors.email = "email must include an @ symbol.";
-  }
-  if (typeof password !== "string" || password.length < 6) {
-    errors.password = "password must be at least 6 characters.";
-  }
-
-  try {
-    const response = await fetch("http://localhost:8080/account/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-    if (!response.ok) {
-      throw new Error("Signing up failed, please try again.");
-    }
-
-    if (response.status === 422 || response.status === 401) {
-      return response;
-    }
-    const resData = await response.json();
-
-    if (resData.errors) {
-      errors.email = resData.errors.email;
-    }
-
-    const token = resData.token;
-    console.log(token);
-    localStorage.setItem("token", token);
-    // ADD EXPIRATION DATA function
-
-    const expiration = new Date();
-
-    expiration.setHours(expiration.getHours() + 1);
-    console.log(expiration);
-
-    localStorage.setItem("expiration", expiration.toISOString());
-  } catch (error) {}
-
-  if (Object.keys(errors).length > 0) {
-    toast.error("Signing up failed, please try again.", {
-      duration: 1500,
-      style: {
-        minWidth: "250px",
-        height: "4rem",
-        fontSize: "1.4rem",
-      },
-    });
-    return errors;
-  }
-  toast.success("Sign up has completed, welcome!", {
-    duration: 1500,
-    style: {
-      minWidth: "250px",
-      height: "4rem",
-      fontSize: "1.4rem",
-    },
-  });
-
-  return redirect("/");
 }

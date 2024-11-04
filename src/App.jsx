@@ -4,7 +4,7 @@ import ProductPage from "./pages/ProductsPage";
 
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import { action as createUserAction } from "./features/Authentication/SignUpForm";
+import { action as createUserAction } from "./pages/SignUpPage";
 import { action as userLoginAction } from "./pages/LoginPage";
 import ProductDetailsPage, {
   loader as ProductDetailsLoader,

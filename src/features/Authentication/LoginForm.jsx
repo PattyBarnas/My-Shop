@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import NavBar from "../../ui/NavBar";
 import styled from "styled-components";
 import { Form, redirect, useActionData } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import { clear } from "localforage";
 
 const FormContainer = styled.div`
   display: block;
