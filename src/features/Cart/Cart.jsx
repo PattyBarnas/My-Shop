@@ -12,14 +12,6 @@ let slideIn = keyframes`
   width: 30%;
 }`;
 
-let slideOut = keyframes`
-0%{
-  width: 30%;
-}
-100%{
-  width: 0%;
-}`;
-// animation: ${(props) => (!props.isOpen ? slideIn : slideOut)} 0.5s;
 const StyledCart = styled.div`
   position: fixed;
   top: 0;
@@ -116,7 +108,7 @@ function Cart() {
           <StyledPText>Add your favorite items to your cart!</StyledPText>
           <StyledCartButton
             onClick={() => {
-              navigate("/");
+              navigate("/products");
               onCartOpen();
             }}
           >

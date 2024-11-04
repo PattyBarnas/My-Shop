@@ -14,8 +14,8 @@ const Form = styled.form`
   align-items: stretch;
   gap: 2rem;
   background-color: #e9ecef;
-  width: 25%;
-  height: 50rem;
+  width: 30%;
+  height: 60rem;
   padding: 2.4rem;
   margin: 1.2rem auto;
   border-radius: 5px;
@@ -45,7 +45,8 @@ const Button = styled.button`
 `;
 
 const H4 = styled.h4`
-  font-size: 2.6rem;
+  font-size: 2.8rem;
+  letter-spacing: 1.2px;
   text-align: center;
   position: absolute;
   top: 10%;
@@ -85,7 +86,7 @@ function CheckoutForm(props) {
   }
   return (
     <Form onSubmit={handleCheckoutSubmit}>
-      <H4>Complete your payment below.</H4>
+      <H4>Complete your payment.</H4>
       <PaymentElement />
       <Button disabled={!stripe}>submit</Button>
     </Form>

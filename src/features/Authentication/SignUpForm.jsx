@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useActionData, Form, redirect } from "react-router-dom";
+import { useActionData, Form, redirect, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 
@@ -12,7 +12,7 @@ const StyledForm = styled.div`
   background-color: #f8f9fa;
   width: 30%;
   padding: 2.6rem 0;
-  margin: 0 auto;
+  margin: 6.8rem auto;
   border-radius: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 `;
@@ -64,6 +64,20 @@ const CreateButton = styled.button`
   letter-spacing: 1px;
   margin-bottom: 1.6rem;
 `;
+const Button = styled.button`
+  width: 15rem;
+  padding: 1rem 4.4rem;
+  border-radius: 15px;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  color: #111;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.6rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+`;
 
 const Span = styled.span`
   font-size: 1.4rem;
@@ -72,6 +86,7 @@ const Span = styled.span`
 `;
 
 export default function SignUpForm(props) {
+  const navigate = useNavigate();
   const errors = useActionData();
   // SIGN UP FORM VALIDATION NEEDS TO BE FIXED
   //  -inputs think everything is a string even when numbers are typed
@@ -108,7 +123,7 @@ export default function SignUpForm(props) {
             id="email"
             name="email"
           />
-          {errors?.email && <Span>{errors.email}</Span>}
+          {errors && errors?.email && <Span>{errors.email}</Span>}
         </P>
         <P>
           <StyledLabel htmlFor="password">Password</StyledLabel>
@@ -124,93 +139,10 @@ export default function SignUpForm(props) {
         <div>
           <CreateButton type="submit">Create</CreateButton>
         </div>
+        <Button type="button" onClick={() => navigate(-1)}>
+          Back to login
+        </Button>
       </StyledForm>
     </Form>
   );
-}
-
-export async function action({ request }) {
-  const formData = await request.formData();
-  const firstName = formData.get("firstName");
-  const lastName = formData.get("lastName");
-  const email = formData.get("email");
-  const password = formData.get("password");
-
-  let errors = {};
-
-  const userData = {
-    firstName,
-    lastName,
-    email,
-    password,
-  };
-
-  if (typeof firstName !== "string" || firstName.length <= 0) {
-    errors.firstName = "must not be empty or a number.";
-  }
-  if (typeof lastName !== "string" || lastName.length <= 0) {
-    errors.lastName = "must not be empty or a number.";
-  }
-  if (typeof email !== "string" || !email.includes("@")) {
-    errors.email = "email must include an @ symbol.";
-  }
-  if (typeof password !== "string" || password.length < 6) {
-    errors.password = "password must be at least 6 characters.";
-  }
-
-  try {
-    const response = await fetch("http://localhost:8080/account/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-    if (!response.ok) {
-      throw new Error("Signing up failed, please try again.");
-    }
-
-    if (response.status === 422 || response.status === 401) {
-      return response;
-    }
-    const resData = await response.json();
-
-    if (resData.errors) {
-      errors.email = resData.errors.email;
-    }
-
-    const token = resData.token;
-    console.log(token);
-    localStorage.setItem("token", token);
-    // ADD EXPIRATION DATA function
-
-    const expiration = new Date();
-
-    expiration.setHours(expiration.getHours() + 1);
-    console.log(expiration);
-
-    localStorage.setItem("expiration", expiration.toISOString());
-  } catch (error) {}
-
-  if (Object.keys(errors).length > 0) {
-    toast.error("Signing up failed, please try again.", {
-      duration: 1500,
-      style: {
-        minWidth: "250px",
-        height: "4rem",
-        fontSize: "1.4rem",
-      },
-    });
-    return errors;
-  }
-  toast.success("Sign up has completed, welcome!", {
-    duration: 1500,
-    style: {
-      minWidth: "250px",
-      height: "4rem",
-      fontSize: "1.4rem",
-    },
-  });
-
-  return redirect("/");
 }

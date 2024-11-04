@@ -28,9 +28,13 @@ const createUser = async (req, res, next) => {
   if (!isValidPassword) {
     errors.password = "Password must be atleast 6 characters long";
   }
+
+  if (Object.keys(errors).length > 0) {
+    return res.status(422).json({ message: "Signing up failed.", errors });
+  }
+
   try {
     const createdUser = await new User(userData);
-
     let authToken = jwt.sign(
       { firstName: createdUser.firstName, email: createdUser.email },
       "secret",
@@ -39,25 +43,17 @@ const createUser = async (req, res, next) => {
       }
     );
 
-    if (Object.keys(errors).length > 0) {
-      return res.json({ message: "Signing up failed.", errors });
-    }
-
-    try {
-      bcrypt.hash(createdUser.password, saltRounds, async function (err, hash) {
-        createdUser.password = hash;
-        createdUser.save();
-      });
-    } catch (error) {}
+    bcrypt.hash(createdUser.password, saltRounds, async function (err, hash) {
+      createdUser.password = hash;
+      await createdUser.save();
+    });
 
     return res
       .status(201)
       .json({ user: createdUser, message: "User created", token: authToken });
   } catch (error) {
-    next(error);
+    return next(error);
   }
-
-  res.send("/");
 };
 
 const login = async (req, res, next) => {

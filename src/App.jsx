@@ -1,16 +1,11 @@
-import { useState } from "react";
-import Cart from "./features/Cart/Cart";
-import Backdrop from "./ui/Backdrop";
-import NavBar from "./ui/NavBar";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage, { loader as ProductLoader } from "./pages/HomePage";
 import ProductPage from "./pages/ProductsPage";
 
-import { CartProvider } from "./store/CartContext";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import { action as createUserAction } from "./features/Authentication/SignUpForm";
-import { action as userLoginAction } from "./features/Authentication/LoginForm";
+import { action as createUserAction } from "./pages/SignUpPage";
+import { action as userLoginAction } from "./pages/LoginPage";
 import ProductDetailsPage, {
   loader as ProductDetailsLoader,
 } from "./pages/ProductDetailsPage";

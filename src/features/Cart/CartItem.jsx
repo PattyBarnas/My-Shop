@@ -119,8 +119,8 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
         <StyledDiv>
           <RemoveBtn
             onClick={() => {
+              itemDeletedNotify();
               onRemoveItem(id);
-              itemDeletedNotify("Here is your toast.");
             }}
           >
             <DeleteIcon />
@@ -128,6 +128,7 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
           <Span>${price}</Span>
         </StyledDiv>
       </StyledCartItem>
+
       <StlyedHr />
     </>
   );

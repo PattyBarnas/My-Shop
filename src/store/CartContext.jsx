@@ -1,5 +1,6 @@
 import { clear } from "localforage";
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
@@ -59,8 +60,17 @@ function CartProvider({ children }) {
         qty: setQuantity(++existingCartItem.qty),
       };
     } else {
+      const itemDeletedNotify = () =>
+        toast.success("Item has been removed from cart.", {
+          style: {
+            minWidth: "250px",
+            height: "4rem",
+            fontSize: "1.4rem",
+          },
+        });
       // if < 0 Delete Item From Cart
       if (existingCartItem.qty <= 1) {
+        itemDeletedNotify();
         handleDeleteItemFromCart(id);
       }
       updatedCart[cartItemIndex] = {
