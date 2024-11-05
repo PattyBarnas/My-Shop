@@ -10,7 +10,7 @@ const StyledHeader = styled.header`
   justify-content: center;
   height: 80vh;
   width: 99%;
-  background-color: #929274;
+  background-color: #52522d;
   margin: 0 auto;
   clip-path: ellipse(100% 100% at 30% 0);
   border-radius: 5px;

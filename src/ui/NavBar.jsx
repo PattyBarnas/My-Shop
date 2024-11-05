@@ -86,7 +86,7 @@ function NavBar(props) {
   const { handleLogout } = useAuth();
   const token = useRouteLoaderData("root");
   const navigate = useNavigate();
-  const user = token && jwtDecode(`${token} || null`);
+  const user = token && jwtDecode(token);
 
   return (
     <StyledNav>
