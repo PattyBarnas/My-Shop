@@ -3,10 +3,13 @@ import Button from "./Button";
 import styled from "styled-components";
 import CartIcon from "../features/Icons/CartIcon";
 import UserIcon from "../features/Icons/UserIcon";
+import SettingsIcon from "../features/Icons/SettingsIcon";
 import Cart from "../features/Cart/Cart";
 import Backdrop from "./Backdrop";
 import { useNavigate, useRouteLoaderData } from "react-router-dom";
 import { useCart } from "../store/CartContext";
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../store/AuthContext";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -71,11 +74,19 @@ const StyledLogo = styled.button`
   cursor: pointer;
 `;
 
+const P = styled.p`
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin: 0 auto 0 0;
+`;
+
 function NavBar(props) {
+  const { onCartOpen, isOpen } = useCart();
+  const { handleLogout } = useAuth();
   const token = useRouteLoaderData("root");
   const navigate = useNavigate();
-  const { onCartOpen, isOpen } = useCart();
-  console.log(token, "TTTTTTT");
+  const user = token && jwtDecode(`${token} || null`);
 
   return (
     <StyledNav>
@@ -85,12 +96,31 @@ function NavBar(props) {
         </StyledLogo>
       </LogoDiv>
       <UL>
-        <StyledList>
-          <StyledAnchor href="/account/login">
-            <UserIcon />
-            <span>Account</span>
-          </StyledAnchor>
-        </StyledList>
+        {token && <P>Welcome back, {user.firstName}!</P>}
+        {token && (
+          <StyledList>
+            <StyledAnchor href="/">
+              👤
+              <span onClick={() => handleLogout()}>logout</span>
+            </StyledAnchor>
+          </StyledList>
+        )}
+        {token && (
+          <StyledList>
+            <StyledAnchor href="/account/settings">
+              <SettingsIcon />
+              <span>Settings</span>
+            </StyledAnchor>
+          </StyledList>
+        )}
+        {!token && (
+          <StyledList>
+            <StyledAnchor href="/account/login">
+              <UserIcon />
+              <span>Account</span>
+            </StyledAnchor>
+          </StyledList>
+        )}
 
         <StyledList>
           <Button onClick={() => onCartOpen()}>
