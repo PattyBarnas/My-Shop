@@ -29,6 +29,6 @@ export function tokenLoader() {
 
 export function checkAuthLoader() {
   if (!token) {
-    return redirect("/account/signup");
+    return redirect("/account/login");
   }
 }

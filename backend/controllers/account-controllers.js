@@ -68,6 +68,7 @@ const login = async (req, res, next) => {
   try {
     user = await User.findOne({ email: userData.email });
 
+    console.log(userData);
     if (!isValidPassword) {
       errors.password = "Password must not be empty.";
     }

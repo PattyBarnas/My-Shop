@@ -5,7 +5,7 @@ import CartIcon from "../features/Icons/CartIcon";
 import UserIcon from "../features/Icons/UserIcon";
 import Cart from "../features/Cart/Cart";
 import Backdrop from "./Backdrop";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteLoaderData } from "react-router-dom";
 import { useCart } from "../store/CartContext";
 
 const StyledNav = styled.nav`
@@ -72,8 +72,10 @@ const StyledLogo = styled.button`
 `;
 
 function NavBar(props) {
+  const token = useRouteLoaderData("root");
   const navigate = useNavigate();
   const { onCartOpen, isOpen } = useCart();
+  console.log(token, "TTTTTTT");
 
   return (
     <StyledNav>
