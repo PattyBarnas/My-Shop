@@ -59,8 +59,6 @@ export async function action({ request }) {
     });
 
     if (response.status === 422) {
-      const errorData = await response.json(); // Parse error response
-      console.log("Duplicate email error:", errorData);
       toast.error("Email is already in use! Try again with a unique email.", {
         duration: 1500,
         style: {
@@ -71,13 +69,8 @@ export async function action({ request }) {
       });
       return json({ email: "Email already exists." }, { status: 422 });
     }
-
     if (!response.ok) {
       throw new Error("Signing up failed, please try again.");
-    }
-
-    if (response.status === 422 || response.status === 401) {
-      return response;
     }
 
     const resData = await response.json();

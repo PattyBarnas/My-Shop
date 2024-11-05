@@ -14,11 +14,14 @@ import ErrorPage from "./pages/Error";
 import "./App.css";
 import Checkout from "./features/Checkout/Checkout";
 
+import { checkAuthLoader, tokenLoader } from "./util/auth";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    loader: tokenLoader,
     children: [
       {
         index: true,

@@ -54,7 +54,7 @@ export async function action({ request }) {
     });
 
     if (!response.ok) {
-      throw new Error("Signing up failed, please try again.");
+      throw json("Signing up failed, please try again.");
     }
 
     if (response.status === 422 || response.status === 401) {
