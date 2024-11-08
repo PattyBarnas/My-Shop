@@ -52,9 +52,18 @@ export async function action({ request }) {
       },
       body: JSON.stringify(userData),
     });
+    console.log(response);
 
     if (!response.ok) {
-      throw new Error("Signing up failed, please try again.");
+      toast.error("Login failed, please try again.", {
+        duration: 1500,
+        style: {
+          minWidth: "250px",
+          height: "4rem",
+          fontSize: "1.4rem",
+        },
+      });
+      return json(errors, { status: 400 });
     }
 
     if (response.status === 422 || response.status === 401) {
@@ -62,6 +71,17 @@ export async function action({ request }) {
     }
     const resData = await response.json();
 
+    if (resData.errors) {
+      toast.error("Login failed, please try again.", {
+        duration: 1500,
+        style: {
+          minWidth: "250px",
+          height: "4rem",
+          fontSize: "1.4rem",
+        },
+      });
+      return json({ password: "Incorrect password." }, { status: 400 });
+    }
     const token = resData.token;
 
     localStorage.setItem("token", token);
