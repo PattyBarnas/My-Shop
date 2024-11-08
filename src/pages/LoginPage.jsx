@@ -52,9 +52,10 @@ export async function action({ request }) {
       },
       body: JSON.stringify(userData),
     });
+    console.log(response);
 
     if (!response.ok) {
-      toast.error("Password does not match user account.", {
+      toast.error("Login failed, please try again.", {
         duration: 1500,
         style: {
           minWidth: "250px",
@@ -62,15 +63,25 @@ export async function action({ request }) {
           fontSize: "1.4rem",
         },
       });
-      return json({ password: "Incorrect password." }, { status: 422 });
+      return json(errors, { status: 400 });
     }
 
     if (response.status === 422 || response.status === 401) {
       return response;
     }
-
     const resData = await response.json();
 
+    if (resData.errors) {
+      toast.error("Login failed, please try again.", {
+        duration: 1500,
+        style: {
+          minWidth: "250px",
+          height: "4rem",
+          fontSize: "1.4rem",
+        },
+      });
+      return json({ password: "Incorrect password." }, { status: 400 });
+    }
     const token = resData.token;
 
     localStorage.setItem("token", token);
