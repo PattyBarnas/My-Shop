@@ -80,13 +80,21 @@ const login = async (req, res, next) => {
     const match = await bcrypt.compare(userData.password, user.password);
 
     if (!match) {
+=======
+    console.log(match);
+    if (user && !match) {
+
       errors.password = "Password was incorrect, please try again.";
     }
 
     if (Object.keys(errors).length > 0) {
+
       return res
         .status(422)
         .json({ message: "login failed, please try again", errors });
+=======
+      return res.json({ message: "login failed, please try again", errors });
+
     }
 
     let authToken = jwt.sign(
