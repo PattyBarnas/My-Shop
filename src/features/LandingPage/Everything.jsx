@@ -17,18 +17,19 @@ const H4 = styled.h4`
   letter-spacing: 1.2px;
   line-height: 6rem;
   width: 40%;
-  color: #c92a2a;
+  color: #8b0000;
 `;
 const StyledButton = styled.button`
   border: none;
   font-size: 1.7rem;
   font-weight: 300;
   text-decoration: none;
-  background-color: #c92a2a;
+  background-color: #8b0000;
   padding: 0.6rem 3.2rem;
   border-radius: 50px;
   color: #fff;
   margin-bottom: 4.2rem;
+  cursor: pointer;
 `;
 
 const Div = styled.div`

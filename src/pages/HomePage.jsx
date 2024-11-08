@@ -14,7 +14,9 @@ function HomePage() {
       <LandingPage />
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
         <Await resolve={products}>
-          {(loadedProducts) => <ProductList products={loadedProducts} />}
+          {(loadedProducts) => (
+            <ProductList products={loadedProducts.slice(1)} />
+          )}
         </Await>
       </Suspense>
       <Everything />
