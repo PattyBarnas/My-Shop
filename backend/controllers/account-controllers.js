@@ -93,7 +93,7 @@ const login = async (req, res, next) => {
       { firstName: user.firstName, email: user.email },
       "secret",
       {
-        expiresIn: "1h",
+        expiresIn: "10s",
       }
     );
 

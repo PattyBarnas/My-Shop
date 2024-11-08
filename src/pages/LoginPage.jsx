@@ -54,12 +54,6 @@ export async function action({ request }) {
     });
 
     if (!response.ok) {
-      throw json("Signing up failed, please try again.");
-    }
-
-    const resData = await response.json();
-
-    if (resData.errors) {
       toast.error("Password does not match user account.", {
         duration: 1500,
         style: {
@@ -70,6 +64,12 @@ export async function action({ request }) {
       });
       return json({ password: "Incorrect password." }, { status: 422 });
     }
+
+    if (response.status === 422 || response.status === 401) {
+      return response;
+    }
+
+    const resData = await response.json();
 
     const token = resData.token;
 

@@ -59,12 +59,6 @@ export async function action({ request }) {
     });
 
     if (!response.ok) {
-      throw new Error("Signing up failed, please try again.");
-    }
-
-    const resData = await response.json();
-
-    if (resData.errors) {
       toast.error("Email is already in use! Try again with a unique email.", {
         duration: 1500,
         style: {
@@ -75,6 +69,8 @@ export async function action({ request }) {
       });
       return json({ email: "Email already exists." }, { status: 422 });
     }
+
+    const resData = await response.json();
 
     const token = resData.token;
 
