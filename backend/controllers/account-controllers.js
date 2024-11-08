@@ -58,7 +58,7 @@ const createUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const userData = req.body;
-  const isValidPassword = passwordValidate(req.body.password);
+  const isValidPassword = passwordValidate(userData.password);
   const isValidEmail = validator.validate(userData.email);
 
   let errors = {};
@@ -79,8 +79,14 @@ const login = async (req, res, next) => {
     }
     const match = await bcrypt.compare(userData.password, user.password);
 
-    if (user && !match) {
+    if (!match) {
       errors.password = "Password was incorrect, please try again.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return res
+        .status(422)
+        .json({ message: "login failed, please try again", errors });
     }
 
     let authToken = jwt.sign(
@@ -97,9 +103,6 @@ const login = async (req, res, next) => {
       token: authToken,
     });
   } catch (error) {}
-  if (Object.keys(errors).length > 0) {
-    return res.json({ message: "login failed, please try again", errors });
-  }
 };
 
 exports.createUser = createUser;

@@ -10,6 +10,7 @@ import { useNavigate, useRouteLoaderData } from "react-router-dom";
 import { useCart } from "../store/CartContext";
 import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../store/AuthContext";
+import "core-js/stable/atob";
 
 const StyledNav = styled.nav`
   position: relative;
