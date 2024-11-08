@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -13,6 +13,8 @@ function AuthProvider({ children }) {
     setToken(token);
   }
   function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiration");
     setToken(null);
   }
 

@@ -58,7 +58,7 @@ const createUser = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const userData = req.body;
-  const isValidPassword = passwordValidate(req.body.password);
+  const isValidPassword = passwordValidate(userData.password);
   const isValidEmail = validator.validate(userData.email);
 
   let errors = {};
@@ -68,6 +68,7 @@ const login = async (req, res, next) => {
   try {
     user = await User.findOne({ email: userData.email });
 
+    console.log(userData);
     if (!isValidPassword) {
       errors.password = "Password must not be empty.";
     }
@@ -91,7 +92,7 @@ const login = async (req, res, next) => {
       { firstName: user.firstName, email: user.email },
       "secret",
       {
-        expiresIn: "1h",
+        expiresIn: "10s",
       }
     );
 
