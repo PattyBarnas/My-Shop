@@ -52,7 +52,6 @@ export async function action({ request }) {
       },
       body: JSON.stringify(userData),
     });
-    console.log(response);
 
     if (!response.ok) {
       toast.error("Login failed, please try again.", {
@@ -63,7 +62,7 @@ export async function action({ request }) {
           fontSize: "1.4rem",
         },
       });
-      return json(errors, { status: 400 });
+      return json({ password: "Incorrect password." }, { status: 404 });
     }
 
     if (response.status === 422 || response.status === 401) {
@@ -72,7 +71,7 @@ export async function action({ request }) {
     const resData = await response.json();
 
     if (resData.errors) {
-      toast.error("Login failed, please try again.", {
+      toast.error("Incorrect password.", {
         duration: 1500,
         style: {
           minWidth: "250px",
@@ -80,7 +79,7 @@ export async function action({ request }) {
           fontSize: "1.4rem",
         },
       });
-      return json({ password: "Incorrect password." }, { status: 400 });
+      return json({ password: "Incorrect password." }, { status: 404 });
     }
     const token = resData.token;
 

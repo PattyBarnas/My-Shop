@@ -68,26 +68,29 @@ const login = async (req, res, next) => {
   try {
     user = await User.findOne({ email: userData.email });
 
-    console.log(userData);
-    if (!isValidPassword) {
-      errors.password = "Password must not be empty.";
-    }
-
     if (!user) {
       errors.email =
         "User was not found. email must include an @ or not be empty.";
+      throw new Error("User does not exist");
     }
-    const match = await bcrypt.compare(userData.password, user.password);
+    if (!isValidPassword) {
+      console.log("2");
+      errors.password = "Password must not be empty.";
+    }
 
+    const match = await bcrypt.compare(userData.password, user.password);
     if (user && !match) {
+      console.log("3");
       errors.password = "Password was incorrect, please try again.";
     }
-
     if (Object.keys(errors).length > 0) {
+      console.log("4");
+
       return res
         .status(422)
         .json({ message: "login failed, please try again", errors });
     }
+    console.log("hi4");
 
     let authToken = jwt.sign(
       { firstName: user.firstName, email: user.email },
@@ -102,7 +105,9 @@ const login = async (req, res, next) => {
       message: "user login was successful.",
       token: authToken,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.createUser = createUser;
