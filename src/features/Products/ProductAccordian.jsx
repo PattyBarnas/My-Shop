@@ -29,8 +29,10 @@ const Div = styled.div`
 `;
 
 const P = styled.p`
+  margin: 0 auto;
   font-size: 1.2rem;
   font-weight: 500;
+  width: 70%;
 `;
 
 function ProductAccordian({ product }) {
@@ -53,9 +55,6 @@ function ProductAccordian({ product }) {
     if (userInput === "2") {
       setIsActiveIndex({ tab2: !isActiveIndex.tab2 });
     }
-
-    // setIsActiveIndex(userInput);
-    // setIsActive(!isActive);
   };
 
   return (

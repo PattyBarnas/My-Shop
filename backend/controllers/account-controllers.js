@@ -74,23 +74,18 @@ const login = async (req, res, next) => {
       throw new Error("User does not exist");
     }
     if (!isValidPassword) {
-      console.log("2");
       errors.password = "Password must not be empty.";
     }
 
     const match = await bcrypt.compare(userData.password, user.password);
     if (user && !match) {
-      console.log("3");
       errors.password = "Password was incorrect, please try again.";
     }
     if (Object.keys(errors).length > 0) {
-      console.log("4");
-
       return res
         .status(422)
         .json({ message: "login failed, please try again", errors });
     }
-    console.log("hi4");
 
     let authToken = jwt.sign(
       { firstName: user.firstName, email: user.email },
@@ -106,7 +101,7 @@ const login = async (req, res, next) => {
       token: authToken,
     });
   } catch (error) {
-    console.log(error);
+    return res.status(404).json({ errors });
   }
 };
 
