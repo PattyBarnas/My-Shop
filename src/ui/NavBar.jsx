@@ -88,6 +88,7 @@ function NavBar(props) {
   const token = useRouteLoaderData("root");
   const navigate = useNavigate();
   const user = token && jwtDecode(token);
+  console.log(user);
 
   return (
     <StyledNav>

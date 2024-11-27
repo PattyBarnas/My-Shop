@@ -80,28 +80,28 @@ function Cart() {
 
   const totalItemsText = totalItemQty === 1 ? "item" : "items";
 
+  let id = Math.floor(Math.random() * 10000);
+
   return (
     <StyledCart>
       <StyledCartHeader>YOUR CART</StyledCartHeader>
       <hr />
 
       {cart.length > 0 ? (
-        cart.map((item) => {
-          return (
-            <ul key={item.product._id}>
-              <CartItem
-                key={item.product._id}
-                id={item.product._id}
-                title={item.product.title}
-                size={item.size}
-                quantity={item.qty}
-                color={item.product.color}
-                price={item.product.price}
-                image={item.product.image}
-              />
-            </ul>
-          );
-        })
+        <ul>
+          {cart.map((item) => (
+            <CartItem
+              key={item.product._id}
+              id={item.product._id}
+              title={item.product.title}
+              size={item.size}
+              quantity={item.qty}
+              color={item.product.color}
+              price={item.product.price}
+              image={item.product.image}
+            />
+          ))}
+        </ul>
       ) : (
         <div>
           <StyledCartP>Your Cart is empty!</StyledCartP>

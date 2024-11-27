@@ -89,7 +89,7 @@ function CartItem({ id, image, price, title, color, size, quantity }) {
 
   return (
     <>
-      <StyledCartItem key={id}>
+      <StyledCartItem>
         <div>
           <Image src={image} alt="T-shirt Image" />
         </div>
