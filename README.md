@@ -1,6 +1,6 @@
-# React + Vite
+# React eCommerce Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a modern eCommerce store template built using React, Node.js, Express, MongoDB, Mongoose and Vite. The project provides a minimal setup to get React running smoothly with Hot Module Replacement (HMR) and ESLint configuration to ensure code quality.
 
 Currently, two official plugins are available:
 
